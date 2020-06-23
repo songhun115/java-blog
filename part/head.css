@@ -230,19 +230,38 @@ label[for] {
 }
 
 body {
-  background: linear-gradient( to right, rgb(167, 138, 246)5%, rgb(230, 255, 247) );
+  background: rgb(214, 237, 255);
 }
 
 /* 로고 */
 .logo {
-  width: 250px;
-  margin:0 auto;
-  }
+  margin:20px auto;
+  width: 150px;
+  margin-bottom: 30px;
+}
 
 /* 탑바 시작 */
 .top-bar {
   height:70px;
   color:black;
+  top: 70px;
+  
+  }
+
+  .top-bar.follow {
+    top:0;
+    position: fixed;
+    width: 100%;
+    background-color: rgb(214, 237, 255);
+  }
+
+  .logo.follow2 {
+    bottom: -20px;
+    right: 10px;
+    position: fixed;
+    width: 50px;
+    background-color: rgb(214, 237, 255);
+    border-radius: 50%;
   }
 
 /* 1차 메뉴 */
@@ -267,7 +286,7 @@ body {
 }
 
 .top-bar .menu-box-1 > ul > li:hover > a {
-  color: black;
+  color: rgb(99, 1, 155);
 }
 
 .top-bar .menu-box-1 > ul > li {
@@ -344,7 +363,7 @@ body {
 
 /* 모바일 탑바 */
 .mobile-top-bar {
-  background-color: rgb(207, 206, 253);
+  background-color: rgb(214, 237, 255);
   position: fixed;
   top:0;
   left:0;
@@ -398,11 +417,10 @@ body {
   transform: rotate(-45deg);
 }
 
-.mobile-top-bar .logo {
-  width: 70px;
+.mobile-top-bar .mlogo {
+  width: 40px;
   margin:0 auto;
-  cursor: pointer;
-  padding-right: 17px;
+  margin-left: -10px;
 }
 
 @media (max-width:799px) {
@@ -420,7 +438,7 @@ body {
   visibility: hidden;
   opacity: 0;
   transition: visibility 0.5s, opacity 0.5s;
-  background-color: rgb(226, 225, 250);
+  background-color: rgb(214, 237, 255);
 }
 
 .mobile-side-bar.active {
@@ -455,4 +473,8 @@ body {
 .mobile-side-bar > .menu-box-1 ul > li:hover > ul {
   display: block;
   transition: 0.3s;
+}
+
+body {
+  height: 5000px;
 }
