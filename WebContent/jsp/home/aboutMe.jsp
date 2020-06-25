@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ include file = "/jsp/part/head.jspf" %>
-	<div class="con">
-	 <h1>About Me</h1>
-	</div>
+	<div class="text-box con visible-on-md-up">
+	<a href="#">About Me</a> 
+</div>
 	<%@ include file = "/jsp/part/foot.jspf" %>
