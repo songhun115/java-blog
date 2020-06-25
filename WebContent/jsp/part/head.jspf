@@ -8,13 +8,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
   
-  <link rel="stylesheet" href="/blog/resource/css/common.css">
-  <link rel="stylesheet" href="/blog/resource/css/home/main.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/resource/css/common.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/resource/css/home/main.css">
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   
-  <script src="/blog/resource/js/common.js"></script>
-  <script src="/blog/resource/js/home/main.js"></script>
+  <script src="${pageContext.request.contextPath}/resource/js/common.js"></script>
+  <script src="${pageContext.request.contextPath}/resource/js/home/main.js"></script>
   
   <title>김혜지 블로그</title>
 </head>
@@ -22,9 +22,9 @@
 <body>
 
   <div class="logo visible-on-md-up">
-    <a href="/blog/home/main">
+    <a href="#">
       <div class="img-box">
-        <img src="/blog/resource/img/hj_logo.png" alt="">
+        <img src="${pageContext.request.contextPath}/resource/img/hj_logo.png" alt="">
       </div>
     </a>
   </div>
@@ -33,9 +33,9 @@
     <div class="con height-100p flex flex-jc-sb">
       <nav class="menu-box-1">
         <ul class="flex height-100p">
-          <li><a href="/blog/home/main" class="height-100p flex flex-ai-c block">Home</a></li>
+          <li><a href="${pageContext.request.contextPath}/s/home/main" class="height-100p flex flex-ai-c block">Home</a></li>
           <li><a href="#" class="height-100p flex flex-ai-c">Articles</a></li>
-          <li><a href="/blog/home/aboutMe" class="height-100p flex flex-ai-c block">About Me</a></li>
+          <li><a href="${pageContext.request.contextPath}/s/home/aboutMe" class="height-100p flex flex-ai-c block">About Me</a></li>
           <li><a href="#" class="height-100p flex flex-ai-c block">SNS</a>
             <ul>
               <li> <a href="https://to2.kr/brk" class="block" target="_blank">GitHub</a></li>
@@ -56,19 +56,20 @@
       <div></div>
     </a>
     <div class="mlogo flex flex-ai-c absolute-center absolute-middle">
-      <a href="/blog/home/main">
+      <a href="#">
         <div class="img-box">
-          <img src="/blog/resource/img/M-logo.png" alt="">
+          <img src="${pageContext.request.contextPath}/resource/img/M-logo.png" alt="">
         </div>
+        </a>
     </div>
   </div>
 
   <div class="mobile-side-bar flex flex-ai-c visible-on-sm-down">
     <nav class="menu-box-1 flex-grow-1">
       <ul>
-        <li><a href="/blog/home/main" class="block">Home</a></li>
-        <li><a href="#" class="block">Articles</a></li>
-        <li><a href="/blog/home/aboutMe" class="block">About Me</a></li>
+        <li><a href="${pageContext.request.contextPath}/s/home/main" class="block">Home</a></li>
+        <li><a href="${pageContext.request.contextPath}/s/home/article" class="block">Articles</a></li>
+        <li><a href="${pageContext.request.contextPath}/s/home/aboutMe" class="block">About Me</a></li>
         <li><a href="#" class="block">SNS</a>
           <ul>
             <li> <a href="https://to2.kr/brk" class="block" target="_blank">GitHub</a></li>

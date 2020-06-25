@@ -231,7 +231,7 @@ label[for] {
 }
 
 body {
-  background: rgb(214, 237, 255);
+  background: white;
 }
 
 /* 로고 */
@@ -358,7 +358,7 @@ body {
 }
 
 .top-bar .menu-box-1 > ul > li > ul > li:hover > a {
-  color:white;
+  color:rgb(207, 206, 253);
   background-color: black;
 }
 
@@ -462,7 +462,7 @@ body {
 
 .mobile-side-bar > .menu-box-1 ul > li:hover > a {
   background-color: black;
-  color:white;
+  color:rgb(207, 206, 253);
 }
 
 .mobile-side-bar > .menu-box-1 > ul ul {
