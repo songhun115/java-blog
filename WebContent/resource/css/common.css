@@ -225,13 +225,9 @@ label[for] {
   }
 }
 
-/* 커스텀 */
-.con {
-  max-width:1356px;
-}
-
-body {
-  background: white;
+h1 {
+	text-align: center;
+	margin-top: 50px;
 }
 
 /* 로고 */
