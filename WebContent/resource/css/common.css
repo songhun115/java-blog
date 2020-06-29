@@ -299,7 +299,7 @@ h1 {
   bottom: 100%;
   right: 0%;
   position: absolute;
-  background-color: rgb(131, 0, 0);
+  background-color: rgb(218, 0, 0);
   visibility: hidden;
   opacity: 0;
   transition: 0.5s;
@@ -322,7 +322,7 @@ h1 {
   top: 100%;
   left: 0%;
   position: absolute;
-  background-color: rgb(131, 0, 0);
+  background-color: rgb(218, 0, 0);
   visibility: hidden;
   opacity: 0;
   transition: 0.5s;
@@ -389,7 +389,7 @@ h1 {
 }
 
 .mobile-top-bar .btn-toggle-mobile-side-bar:hover > div {
-	background-color: rgb(131, 0, 0);
+	background-color: rgb(218, 0, 0);
 }
 
 .mobile-top-bar .btn-toggle-mobile-side-bar.active > div {

@@ -17,5 +17,5 @@ TRUNCATE article;
 INSERT INTO article
 SET regDate = NOW(),
 updateDate = NOW(),
-title = "제목3",
-`body` = "내용3";
+title = '제목😎',
+`body` = '# ㅋㅋ\n## ㅋㅋㅋ';
