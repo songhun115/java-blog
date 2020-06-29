@@ -14,7 +14,8 @@
 }
 
 .table-box > table > thead {
-	background-color: rgb(214, 237, 255);
+	background-color: black;
+  	color: rgb(207, 206, 253);
 }
 
 /* 테이블 글자 */
@@ -27,7 +28,7 @@
 }
 
 .table-box > table td > a:hover {
-	color: rgb(99, 1, 155);
+	color: rgb(131, 0, 0);
 	text-decoration: underline;
 }
 

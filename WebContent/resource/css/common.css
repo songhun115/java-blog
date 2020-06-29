@@ -249,7 +249,8 @@ h1 {
     top:0;
     position: fixed;
     width: 100%;
-    background-color: rgb(214, 237, 255);
+    background-color: black;
+    color: rgb(207, 206, 253);
   }
 
   .logo.follow2 {
@@ -257,7 +258,7 @@ h1 {
     right: 10px;
     position: fixed;
     width: 50px;
-    background-color: rgb(214, 237, 255);
+    background-color: rgb(207, 206, 253);
     border-radius: 50%;
   }
 
@@ -298,7 +299,7 @@ h1 {
   bottom: 100%;
   right: 0%;
   position: absolute;
-  background-color: black;
+  background-color: rgb(131, 0, 0);
   visibility: hidden;
   opacity: 0;
   transition: 0.5s;
@@ -321,7 +322,7 @@ h1 {
   top: 100%;
   left: 0%;
   position: absolute;
-  background-color: black;
+  background-color: rgb(131, 0, 0);
   visibility: hidden;
   opacity: 0;
   transition: 0.5s;
@@ -350,17 +351,18 @@ h1 {
   padding:15px 0;
   text-align: center;
   font-size: 0.9rem;
-  background-color: rgb(207, 206, 253);
+  background-color: black;
+  color: rgb(207, 206, 253);
 }
 
 .top-bar .menu-box-1 > ul > li > ul > li:hover > a {
-  color:rgb(207, 206, 253);
-  background-color: black;
+  color: black;
+  background-color: rgb(207, 206, 253);
 }
 
 /* 모바일 탑바 */
 .mobile-top-bar {
-  background-color: rgb(214, 237, 255);
+  background-color: black;
   position: fixed;
   top:0;
   left:0;
@@ -380,14 +382,18 @@ h1 {
   position: absolute;
   width: 100%;
   height: 10%;
-  background-color: black;
+  background-color: rgb(207, 206, 253);
   top: 0;
   left: 0;
-  transition: top .3s .3s, transform .3s 0s, visibility 0s .2s;
+  transition: top .2s .2s, transform .2s 0s, visibility 0s;
+}
+
+.mobile-top-bar .btn-toggle-mobile-side-bar:hover > div {
+	background-color: rgb(131, 0, 0);
 }
 
 .mobile-top-bar .btn-toggle-mobile-side-bar.active > div {
-  transition: top .3s .0s, transform .3s .3s, visibility 0s;
+  transition: top .2s .0s, transform .2s .2s, visibility 0s;
 }
 
 .mobile-top-bar .btn-toggle-mobile-side-bar > div:nth-child(2) {
@@ -415,7 +421,7 @@ h1 {
 }
 
 .mobile-top-bar .mlogo {
-  width: 40px;
+  width: 35px;
   margin:0 auto;
   margin-left: -10px;
 }
@@ -435,7 +441,8 @@ h1 {
   visibility: hidden;
   opacity: 0;
   transition: visibility 0.5s, opacity 0.5s;
-  background-color: rgb(214, 237, 255);
+  background-color: black;
+  color:rgb(207, 206, 253);
 }
 
 .mobile-side-bar.active {
@@ -457,13 +464,13 @@ h1 {
 }
 
 .mobile-side-bar > .menu-box-1 ul > li:hover > a {
-  background-color: black;
-  color:rgb(207, 206, 253);
+  background-color: rgb(207, 206, 253);
+  color: black;
 }
 
 .mobile-side-bar > .menu-box-1 > ul ul {
   transition: 0.3s;
-  background-color: rgb(207, 206, 253);
+  background-color: black;
   display: none;
 }
 
@@ -473,5 +480,5 @@ h1 {
 }
 
 body {
-  height: 5000px;
+  height: 1500px;
 }
