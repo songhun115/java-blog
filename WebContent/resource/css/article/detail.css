@@ -1,0 +1,12 @@
+h1 {
+    margin-bottom: 60px;
+}
+/*
+h1::after {
+    content: "";
+    width: 40%;
+    display: block;
+    border-bottom: 3px solid rgb(218, 0, 0);
+    margin-left: auto;
+    margin-right: auto;
+}*/

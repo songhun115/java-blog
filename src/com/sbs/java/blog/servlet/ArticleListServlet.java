@@ -20,9 +20,9 @@ import com.sbs.java.blog.util.DBUtil;
 @WebServlet("/s/article/list")
 public class ArticleListServlet extends HttpServlet {
 	private List<Article> getArticles() {
-		String url = "jdbc:mysql://localhost:3306/blog?serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true";
-		String user = "root";
-		String password = "hj1234";
+		String url = "jdbc:mysql://site37.iu.gy:3306/site37?serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true";
+		String user = "site37";
+		String password = "sbs123414";
 		String driverName = "com.mysql.cj.jdbc.Driver";
 		
 		List<Article> articles = new ArrayList<>();

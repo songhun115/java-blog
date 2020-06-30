@@ -28,10 +28,12 @@
 
 <!-- 토스트 UI 에디터, CSS 코어 -->
 <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" />
-	
+
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resource/css/article/detail.css">
 <div class="con">
 	<h1><%=article.getTitle()%></h1>
-	
+	<h5><%=article.getRegDate()%></h5>
+	<h5><%=article.getUpdateDate()%></h5>
 	<div id="origin1" style="display: none;"><%=article.getBody()%></div>
 	<div id="viewer1"></div>
 	<script>
