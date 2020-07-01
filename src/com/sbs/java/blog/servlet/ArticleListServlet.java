@@ -19,21 +19,6 @@ import com.sbs.java.blog.util.DBUtil;
 
 @WebServlet("/s/article/list")
 public class ArticleListServlet extends HttpServlet {
-	private List<Article> getArticle(int cateItemId) {
-		String url = "jdbc:mysql://site37.iu.gy:3306/site37?serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true";
-		String user = "site37";
-		String password = "sbs123414";
-		String driverName = "com.mysql.cj.jdbc.Driver";
-
-		String sqlPage = "";
-
-		sqlPage += String.format("SELECT COUNT (*) ");
-		sqlPage += String.format("FROM article ");
-		sqlPage += String.format("WHERE cateItemId = %d ", cateItemId);
-
-		return null;
-	}
-
 	private List<Article> getArticles(int cateItemId, int page) {
 		String url = "jdbc:mysql://site37.iu.gy:3306/site37?serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true";
 		String user = "site37";

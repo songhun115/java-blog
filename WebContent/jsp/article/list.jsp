@@ -37,13 +37,6 @@
 			</tbody>
 		</table>
 	</div>
-	<%
-		for (int i = 1; i <= Math.ceil((double)articles.size()); i++) {
-	%>
-	<a href="${pageContext.request.contextPath}/s/article/list?cateItemId=${param.cateItemId}&page=<%= i %>"><span><%= i %></span></a>
-	<%
-		}
-	%>
 </div>
 
 <%@ include file="/jsp/part/foot.jspf"%>
