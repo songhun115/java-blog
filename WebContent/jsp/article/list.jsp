@@ -7,7 +7,8 @@
 	List<Article> articles = (List<Article>) request.getAttribute("articles");
 %>
 
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resource/css/article/list.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resource/css/article/list.css">
 
 <div class="con">
 	<h1>Article List</h1>
@@ -19,7 +20,6 @@
 					<th>ID</th>
 					<th>제목</th>
 					<th>등록 날짜</th>
-					<th>갱신 날짜</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -30,7 +30,6 @@
 					<td><%=article.getId()%></td>
 					<td><a href="./detail?id=<%=article.getId()%>"><%=article.getTitle()%></a></td>
 					<td><%=article.getRegDate()%></td>
-					<td><%=article.getUpdateDate()%></td>
 				</tr>
 				<%
 					}
@@ -38,6 +37,13 @@
 			</tbody>
 		</table>
 	</div>
+	<%
+		for (int i = 1; i <= Math.ceil((double)articles.size()); i++) {
+	%>
+	<a href="${pageContext.request.contextPath}/s/article/list?cateItemId=${param.cateItemId}&page=<%= i %>"><span><%= i %></span></a>
+	<%
+		}
+	%>
 </div>
 
 <%@ include file="/jsp/part/foot.jspf"%>

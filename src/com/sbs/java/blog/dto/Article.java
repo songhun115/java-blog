@@ -6,6 +6,7 @@ public class Article extends Dto {
 	private String updateDate;
 	private String title;
 	private String body;
+	private int cateItemId;
 	
 	public Article() {
 		
@@ -16,6 +17,7 @@ public class Article extends Dto {
 		this.updateDate = (String)row.get("updateDate");
 		this.title = (String)row.get("title");
 		this.body = (String)row.get("body");
+		this.cateItemId = (int)row.get("cateItemId");
 	}
 
 	public String getUpdateDate() {
@@ -46,7 +48,15 @@ public class Article extends Dto {
 	@Override
 	public String toString() {
 		return "Article [id=" + getId() + ", regdate=" + getRegDate() + ", updateDate=" + updateDate + ", title=" + title
-				+ ", body=" + body + "]";
+				+ ", body=" + body + ", cateItemId=" + cateItemId + "]";
+	}
+
+	public int getCateItemId() {
+		return cateItemId;
+	}
+
+	public void setCateItemId(int cateItemId) {
+		this.cateItemId = cateItemId;
 	}
 	
 }

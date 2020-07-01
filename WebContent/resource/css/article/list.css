@@ -3,11 +3,15 @@
 /* 테이블 박스(양 옆 전체) */
 .table-box {
 	margin: 40px auto 20px auto;
-	width: 759px;
+	width: 100%;
 	text-align: center;
 }
 
 /* 테이블 */
+.table-box > table {
+	width: 100%;
+}
+
 .table-box > table {
 	border-bottom:1px solid skyblue;
 	border-collapse: collapse;
