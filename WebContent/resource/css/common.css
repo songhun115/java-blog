@@ -490,3 +490,7 @@ body {
 	display: block;
 	transition: 0.3s;
 }
+
+body {
+	height: 1500px;
+}

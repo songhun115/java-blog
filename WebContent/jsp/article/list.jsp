@@ -10,7 +10,8 @@
 	int cateItemId = (int) request.getAttribute("cateItemId");
 %>
 
-<link rel="stylesheet"href="${pageContext.request.contextPath}/resource/css/article/list.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resource/css/article/list.css">
 
 <div class="con">
 	<h1>Article List</h1>
@@ -54,10 +55,13 @@
 		<ul class="flex flex-jc-c">
 			<%
 				for (int i = 1; i <= totalPage; i++) {
+					if( cateItemId > 0 ) { 
 			%>
-			<li class="<%=i == paramPage ? "current" : ""%>"><a
-				href="?page=<%=i%>" class="block"><%=i%></a></li>
-			<%
+				<li class="<%=i == paramPage ? "current" : ""%>"><a	href="?cateItemId=${param.cateItemId}&page=<%=i%>" class="block"><%=i%></a></li>
+			<% } else { %>
+				<li class="<%=i == paramPage ? "current" : ""%>"><a	href="?page=<%=i%>" class="block"><%=i%></a></li>
+			<% 
+					}
 				}
 			%>
 		</ul>

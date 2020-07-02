@@ -16,12 +16,48 @@
 .cateItem > ul > li > a {
 	display: block;
 	padding: 10px 20px;
+	
 }
 
-.cateItem > ul > li.current > a {
+.cateItem > ul > li.current {
 	color: blue;
 	font-weight: bold;
 	border-bottom: 1px solid red;
+	
+}
+
+.cateItem > ul > li > a::after {
+	clear: both;
+	content: "";
+	position: absolute;
+	top:100%;
+	left:50%;
+	width: 0;
+	height: 1px;
+	background-color:red;
+	transition: 0.4s;
+}
+
+.cateItem > ul > li:hover > a::after {
+	width:50%;
+	transition: 0.4s;
+}
+
+.cateItem > ul > li > a::before {
+	clear: both;
+	content: "";
+	position: absolute;
+	top:100%;
+	right:50%;
+	width: 0;
+	height: 1px;
+	background-color:red;
+	transition: 0.4s;
+}
+
+.cateItem > ul > li:hover > a::before {
+	width:50%;
+	transition: 0.4s;
 }
 
 /* 테이블 박스(양 옆 전체) */
