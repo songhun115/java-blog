@@ -1,174 +1,118 @@
+<%@ page import="java.util.List"%>
+<%@ page import="com.sbs.java.blog.dto.CateItem"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-<<<<<<< HEAD
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
-  
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/resource/css/common.css">
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/resource/css/home/main.css">
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  
-  <script src="${pageContext.request.contextPath}/resource/js/common.js"></script>
-  <script src="${pageContext.request.contextPath}/resource/js/home/main.js"></script>
-  
-  <title>정성훈 블로그</title>
-</head>
-
-
-<body>
-
-  <div class="logo visible-on-md-up">
-    <a href="#">
-      <div class="img-box">
-        <img src="${pageContext.request.contextPath}/resource/img/hj_logo.png" alt="">
-      </div>
-    </a>
-  </div>
-
-  <div class="top-bar visible-on-md-up">
-    <div class="con height-100p flex flex-jc-sb">
-      <nav class="menu-box-1">
-        <ul class="flex height-100p">
-          <li><a href="${pageContext.request.contextPath}/jsp/home/main.jsp" class="height-100p flex flex-ai-c block">Home</a></li>
-          <li><a href="${pageContext.request.contextPath}/s/article/list" class="height-100p flex flex-ai-c">Articles</a></li>
-          <li><a href="${pageContext.request.contextPath}/jsp/home/aboutMe.jsp" class="height-100p flex flex-ai-c block">About Me</a></li>
-          <li><a href="#" class="height-100p flex flex-ai-c block">SNS</a>
-            <ul>
-              <li> <a href="https://to2.kr/brk" class="block" target="_blank">GitHub</a></li>
-              <li> <a href="https://to2.kr/bfa" class="block" target="_blank">Tistory</a></li>
-              <li> <a href="https://to2.kr/bhg" class="block" target="_blank">Youtube</a></li>
-              <li> <a href="https://to2.kr/bnf" class="block" target="_blank">Wiki</a></li>
-            </ul>
-          </li>
-        </ul>
-      </nav>
-    </div>
-  </div>
-
-  <div class="mobile-top-bar visible-on-sm-down flex flex-ai-c">
-    <a href="#" class="btn-toggle-mobile-side-bar">
-      <div></div>
-      <div></div>
-      <div></div>
-    </a>
-    <div class="mlogo flex flex-ai-c absolute-center absolute-middle">
-      <a href="#">
-        <div class="img-box">
-          <img src="${pageContext.request.contextPath}/resource/img/M-logo.png" alt="">
-        </div>
-        </a>
-    </div>
-  </div>
-
-  <div class="mobile-side-bar flex flex-ai-c visible-on-sm-down">
-    <nav class="menu-box-1 flex-grow-1">
-      <ul>
-        <li><a href="${pageContext.request.contextPath}/jsp/home/main.jsp" class="block">Home</a></li>
-        <li><a href="${pageContext.request.contextPath}/s/article/list" class="block">Articles</a></li>
-        <li><a href="${pageContext.request.contextPath}/jsp/home/aboutMe.jsp" class="block">About Me</a></li>
-        <li><a href="#" class="block">SNS</a>
-          <ul>
-            <li> <a href="https://to2.kr/brk" class="block" target="_blank">GitHub</a></li>
-            <li> <a href="https://to2.kr/bfa" class="block" target="_blank">Tistory</a></li>
-            <li> <a href="https://to2.kr/bhg" class="block" target="_blank">Youtube</a></li>
-            <li> <a href="https://to2.kr/bnf" class="block" target="_blank">Wiki</a></li>
-          </ul>
-        </li>
-      </ul>
-    </nav>
-  </div>
-=======
 	pageEncoding="UTF-8"%>
+<%
+	List<CateItem> cateItems = (List<CateItem>) request.getAttribute("cateItems");
+%>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Document</title>
 
+<!-- 구글 폰트 불러오기 -->
+<!-- rotobo(400/900), notosanskr(400/900) -->
+<link
+	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;900&family=Roboto:wght@400;900&display=swap"
+	rel="stylesheet">
+
+<!-- 폰트어썸 불러오기 -->
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
 
-<link rel="stylesheet" href="/java-blog/resource/css/common.css">
-<link rel="stylesheet" href="/java-blog/resource/css/home/main.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resource/css/common.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resource/css/home/main.css">
 
+<!-- 제이쿼리 불러오기 -->
 <script
-	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js">
-	
-</script>
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+<script src="${pageContext.request.contextPath}/resource/js/common.js"></script>
 
-<script src="/java-blog/resource/js/common.js"></script>
-<script src="/java-blog/home/resource/js/home/main.js"></script>
-
+<title>정성훈 블로그</title>
 </head>
+
 <body>
-
-
-
-	<!-- 데스크탑 탑바 -->
-	<div class="top-bar visible-on-md-up">
-		<div class="con">
-			<!-- 블로그 넓이 등 라이브러리 -->
-
-			<nav class="menu-box-1">
-				<!-- 블로그 메뉴 -->
-				<ul>
-					<li><a href="/java-blog/home/main">Home</a></li>
-					<li><a href="/java-blog/home/article">Articles</a></li>
-					<li class="logo"><a href="/java-blog/home/main"><i
-							class="fas fa-cannabis"></i></a></li>
-					<!-- 로고 -->
-					<li><a href="/java-blog/home/aboutMe">About Me</a></li>
-					<li><a href="#">SNS</a> <!-- 1차메뉴  -->
-						<ul>
-							<li><a href="fa.com" target="_blank">FaceBook</a></li>
-							<!-- 2차 메뉴  -->
-							<li><a href="instagram.com" target="_blank">Instagram</a></li>
-							<li><a href="https://github.com" target="_blank">GitHub</a></li>
-						</ul></li>
-				</ul>
-			</nav>
-		</div>
-	</div>
-	
-	<div class="menu-icon">
-		<a href="#" class="icon"><i class="far fa-lightbulb"></i></a>
-	</div>
-
-
-	<!-- 모바일 메뉴 버튼과 상단 바 -->
-	<div class="mobile-top-bar visible-on-sm-down">
-		<a href="#" class="mobile-btn-toggle-side-bar"> <i
-			class="far fa-lightbulb"></i>
-		</a> <a href="/java-blog/home/main" class="logo"> <i
-			class="fas fa-cannabis"></i>
+	<div class="mobile-top-bar visible-on-sm-down flex">
+		<a href="#" class="btn-toggle-mobile-side-bar flex flex-ai-c"> <i
+			class="fas fa-bars"></i> <i class="fas fa-times"></i>
+		</a> <a href="${pageContext.request.contextPath}/s/home/main"
+			class="logo absolute-center absolute-middle flex flex-ai-c"> <i
+			class="fas fa-award"></i>
 		</a>
 	</div>
+	<div class="mobile-side-bar flex flex-ai-c visible-on-sm-down">
+		<nav class="menu-box-1 flex-grow-1">
+			<ul>
+				<li><a href="${pageContext.request.contextPath}/s/home/main"
+					class="block">Home</a></li>
+				<li><a href="#" class="block">Articles</a>
+					<ul>
+						<li><a
+							href="${pageContext.request.contextPath}/s/article/list"
+							class="block">전체</a></li>
+						<%
+							for (CateItem cateItem : cateItems) {
+						%>
+						<li><a
+							href="${pageContext.request.contextPath}/s/article/list?cateItemId=<%=cateItem.getId()%>"
+							class="block"><%=cateItem.getName()%></a></li>
+						<%
+							}
+						%>
+					</ul></li>
+				<li><a href="${pageContext.request.contextPath}/s/home/aboutMe"
+					class="block">AboutMe</a></li>
+				<li><a href="#" class="block">SNS</a>
+					<ul>
+						<li><a href="https://github.com/jhs512" target="_blank"
+							class="block">GITHUB</a></li>
+						<li><a href="https://github.com/jhs512" target="_blank"
+							class="block">INSTA</a></li>
+					</ul></li>
+			</ul>
+		</nav>
+	</div>
+	<div class="top-bar visible-on-md-up">
+		<div class="con flex flex-jc-sb height-100p">
+			<a href="${pageContext.request.contextPath}/s/home/main"
+				class="logo flex flex-ai-c"> <i class="fas fa-award"></i>
+			</a>
 
-	<!-- 버튼 클릭시 나오는 사이드 바 -->
-	<div class="mobile-side-bar visible-on-sm-down">
-		<div class="cover">
-			<nav class="mobile-menu-box1">
-				<ul>
-					<li><a href="/java-blog/home/article">Home</a></li>
-					<li><a href="/java-blog/home/article">Articles</a></li>
-					<li><a href="/java-blog/home/aboutMe">About Me</a></li>
-					<li><a href="#">SNS</a>
+			<nav class="menu-box-1">
+				<ul class="flex height-100p">
+					<li><a href="${pageContext.request.contextPath}/s/home/main"
+						class="flex height-100p flex-ai-c">Home</a></li>
+					<li><a
+						href="${pageContext.request.contextPath}/s/article/list"
+						class="flex height-100p flex-ai-c">Articles</a>
 						<ul>
-							<li><a href="fb.com" target="_blank">FaceBook</a></li>
-							<li><a href="instagram.com" target="_blank">Instagram</a></li>
-							<li><a href="https://github.com" target="_blank">GitHub</a></li>
+							<%
+								for (CateItem cateItem : cateItems) {
+							%>
+							<li><a
+								href="${pageContext.request.contextPath}/s/article/list?cateItemId=<%=cateItem.getId()%>"
+								class="block"><%=cateItem.getName()%></a></li>
+							<%
+								}
+							%>
+						</ul></li>
+					<li><a
+						href="${pageContext.request.contextPath}/s/home/aboutMe"
+						class="flex height-100p flex-ai-c">AboutMe</a></li>
+					<li><a href="#" class="flex height-100p flex-ai-c">SNS</a>
+						<ul>
+							<li><a href="https://github.com/jhs512" target="_blank"
+								class="block">GITHUB</a></li>
+							<li><a href="https://github.com/jhs512" target="_blank"
+								class="block">INSTA</a></li>
 						</ul></li>
 				</ul>
 			</nav>
 		</div>
 	</div>
->>>>>>> 3d8c61e905dc7f02b07f69308e54a5b485d9a134
