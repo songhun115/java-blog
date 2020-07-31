@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
+<<<<<<< HEAD
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,8 +17,9 @@
   <script src="${pageContext.request.contextPath}/resource/js/common.js"></script>
   <script src="${pageContext.request.contextPath}/resource/js/home/main.js"></script>
   
-  <title>김혜지 블로그</title>
+  <title>정성훈 블로그</title>
 </head>
+
 
 <body>
 
@@ -81,3 +83,92 @@
       </ul>
     </nav>
   </div>
+=======
+	pageEncoding="UTF-8"%>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
+
+<link rel="stylesheet" href="/java-blog/resource/css/common.css">
+<link rel="stylesheet" href="/java-blog/resource/css/home/main.css">
+
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+	
+</script>
+
+
+<script src="/java-blog/resource/js/common.js"></script>
+<script src="/java-blog/home/resource/js/home/main.js"></script>
+
+</head>
+<body>
+
+
+
+	<!-- 데스크탑 탑바 -->
+	<div class="top-bar visible-on-md-up">
+		<div class="con">
+			<!-- 블로그 넓이 등 라이브러리 -->
+
+			<nav class="menu-box-1">
+				<!-- 블로그 메뉴 -->
+				<ul>
+					<li><a href="/java-blog/home/main">Home</a></li>
+					<li><a href="/java-blog/home/article">Articles</a></li>
+					<li class="logo"><a href="/java-blog/home/main"><i
+							class="fas fa-cannabis"></i></a></li>
+					<!-- 로고 -->
+					<li><a href="/java-blog/home/aboutMe">About Me</a></li>
+					<li><a href="#">SNS</a> <!-- 1차메뉴  -->
+						<ul>
+							<li><a href="fa.com" target="_blank">FaceBook</a></li>
+							<!-- 2차 메뉴  -->
+							<li><a href="instagram.com" target="_blank">Instagram</a></li>
+							<li><a href="https://github.com" target="_blank">GitHub</a></li>
+						</ul></li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+	
+	<div class="menu-icon">
+		<a href="#" class="icon"><i class="far fa-lightbulb"></i></a>
+	</div>
+
+
+	<!-- 모바일 메뉴 버튼과 상단 바 -->
+	<div class="mobile-top-bar visible-on-sm-down">
+		<a href="#" class="mobile-btn-toggle-side-bar"> <i
+			class="far fa-lightbulb"></i>
+		</a> <a href="/java-blog/home/main" class="logo"> <i
+			class="fas fa-cannabis"></i>
+		</a>
+	</div>
+
+	<!-- 버튼 클릭시 나오는 사이드 바 -->
+	<div class="mobile-side-bar visible-on-sm-down">
+		<div class="cover">
+			<nav class="mobile-menu-box1">
+				<ul>
+					<li><a href="/java-blog/home/article">Home</a></li>
+					<li><a href="/java-blog/home/article">Articles</a></li>
+					<li><a href="/java-blog/home/aboutMe">About Me</a></li>
+					<li><a href="#">SNS</a>
+						<ul>
+							<li><a href="fb.com" target="_blank">FaceBook</a></li>
+							<li><a href="instagram.com" target="_blank">Instagram</a></li>
+							<li><a href="https://github.com" target="_blank">GitHub</a></li>
+						</ul></li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+>>>>>>> 3d8c61e905dc7f02b07f69308e54a5b485d9a134

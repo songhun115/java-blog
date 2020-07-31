@@ -2,4 +2,7 @@
 .project
 .settings/
 build/
+<<<<<<< HEAD
 bin/
+=======
+>>>>>>> 3d8c61e905dc7f02b07f69308e54a5b485d9a134
