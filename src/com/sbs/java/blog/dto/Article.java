@@ -1,4 +1,5 @@
 package com.sbs.java.blog.dto;
+
 import java.util.Map;
 
 public class Article extends Dto {
@@ -19,7 +20,7 @@ public class Article extends Dto {
 	@Override
 	public String toString() {
 		return "Article [updateDate=" + updateDate + ", cateItemId=" + cateItemId + ", title=" + title + ", body="
-				+ body + ", getId()=" + getId() + ", getRegDate()=" + getRegDate() + "]";
+				+ body + ", dto=" + super.toString() + "]";
 	}
 
 	public String getUpdateDate() {
@@ -41,13 +42,17 @@ public class Article extends Dto {
 	public String getTitle() {
 		return title;
 	}
+
 	public void setTitle(String title) {
 		this.title = title;
 	}
+
 	public String getBody() {
 		return body;
 	}
+
 	public void setBody(String body) {
 		this.body = body;
 	}
+
 }

@@ -16,8 +16,9 @@
   <script src="${pageContext.request.contextPath}/resource/js/common.js"></script>
   <script src="${pageContext.request.contextPath}/resource/js/home/main.js"></script>
   
-  <title>김혜지 블로그</title>
+  <title>정성훈 블로그</title>
 </head>
+
 
 <body>
 

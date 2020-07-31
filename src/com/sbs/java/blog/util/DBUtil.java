@@ -12,8 +12,8 @@ import java.util.List;
 import java.util.Map;
 
 public class DBUtil {
-	public static Map<String, Object> selectRow(Connection connection, String sql) {
-		List<Map<String, Object>> rows = selectRows(connection, sql);
+	public static Map<String, Object> selectRow(Connection dbConn, String sql) {
+		List<Map<String, Object>> rows = selectRows(dbConn, sql);
 
 		if (rows.size() == 0) {
 			return new HashMap<>();
@@ -21,10 +21,10 @@ public class DBUtil {
 
 		return rows.get(0);
 	}
-	
+
 	public static List<Map<String, Object>> selectRows(Connection dbConn, String sql) {
 		List<Map<String, Object>> rows = new ArrayList<>();
-		
+
 		Statement stmt = null;
 		ResultSet rs = null;
 
@@ -32,7 +32,6 @@ public class DBUtil {
 			stmt = dbConn.createStatement();
 			rs = stmt.executeQuery(sql);
 			ResultSetMetaData metaData = rs.getMetaData();
-			
 			int columnSize = metaData.getColumnCount();
 
 			while (rs.next()) {
@@ -53,34 +52,37 @@ public class DBUtil {
 						row.put(columnName, value);
 					}
 				}
+				
+				System.out.println(row);
 
 				rows.add(row);
 			}
 		} catch (SQLException e) {
-			System.err.printf("[SQL 예외, SQL : %s] : %s\n", sql, e.getMessage());
-			e.printStackTrace();
-		}
-		finally {
+			System.err.println("[SQLException 예외]");
+			System.err.println("msg : " + e.getMessage());
+		} finally {
 			if (stmt != null) {
 				try {
 					stmt.close();
 				} catch (SQLException e) {
-					System.err.printf("[SQL 예외] : %s\n", e.getMessage());
+					System.err.println("[SQLException 예외]");
+					System.err.println("msg : " + e.getMessage());
 				}
 			}
-			
+
 			if (rs != null) {
 				try {
 					rs.close();
 				} catch (SQLException e) {
-					System.err.printf("[SQL 예외] : %s\n", e.getMessage());
+					System.err.println("[SQLException 예외]");
+					System.err.println("msg : " + e.getMessage());
 				}
 			}
 		}
 
 		return rows;
 	}
-	
+
 	public static int selectRowIntValue(Connection dbConn, String sql) {
 		Map<String, Object> row = selectRow(dbConn, sql);
 
@@ -110,5 +112,4 @@ public class DBUtil {
 
 		return false;
 	}
-
 }
