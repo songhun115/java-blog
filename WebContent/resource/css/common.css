@@ -234,7 +234,11 @@ body {
 
 .top-bar > .con > .menu-icon {
     position: absolute;
+<<<<<<< HEAD
     left: 100%;
+=======
+    left: 108%;
+>>>>>>> 3d8c61e905dc7f02b07f69308e54a5b485d9a134
     top: 50%;
     transform: translateY(-50%);
 } 
