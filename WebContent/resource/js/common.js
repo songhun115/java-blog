@@ -1,32 +1,57 @@
 function MobileSideBar__init() {
-    var $btnToggleMobileSideBar = $('.btn-toggle-mobile-side-bar');
-
-    $btnToggleMobileSideBar.click(function () {
-        if ($(this).hasClass('active')) {
+    var $btnToggleMobileSideBar = $('.mobile-btn-toggle-side-bar');
+    
+    $btnToggleMobileSideBar.click(function() {
+        if ( $(this).hasClass('active') ) {
             $(this).removeClass('active');
-            $('.mobile-side-bar').removeClass('active');
+            $('.cover').removeClass('active');
+            
         }
         else {
             $(this).addClass('active');
-            $('.mobile-side-bar').addClass('active');
+            $('.cover').addClass('active');
+            
         }
     });
 }
 
-$(function () {
+
+$(function() {
     MobileSideBar__init();
 });
 
-// 탑바 스크롤
-$(window).scroll(function () {
-    var scrollTop = $(window).scrollTop();
 
-    if (scrollTop > 175) {
-        $('.top-bar').addClass('follow');
-        $('.logo').addClass('follow2');
-    }
-    else {
-        $('.top-bar').removeClass('follow');
-        $('.logo').removeClass('follow2');
-    }
+function btnBackGround__init() {
+    var $btnBackGround = $('.icon');
+
+    $btnBackGround.click(function() {
+        if ( $(this).hasClass('active') ) {
+            $(this).removeClass('active');
+            $('body').removeClass('active');
+            $('.top-bar').removeClass('active');            
+        }
+        else {
+            $(this).addClass('active');
+            $('.top-bar').addClass('active');
+            $('body').addClass('active');          
+        }
+    });
+}
+
+$(function() {
+    btnBackGround__init();
+
 });
+
+
+
+
+
+
+/*
+$('.icon').click(function(){$('body').css("background","#D4D0B8")})
+
+$(function(){
+    $('.icon').click(function(){$('body').css("background","#F9F4D9")})    
+});
+*/
