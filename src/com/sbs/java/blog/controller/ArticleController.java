@@ -33,9 +33,19 @@ public class ArticleController extends Controller {
 			return doActionDoWrite(req, resp);
 		case "write":
 			return doActionWrite(req, resp);
+		case "delete":
+			return doActionDelete(req, resp);
 		}
 
 		return "";
+	}
+
+	private String doActionDelete(HttpServletRequest req, HttpServletResponse resp) {
+		int id = Util.getInt(req, "id");
+		System.out.println(id);
+		articleService.delete(id);
+
+		return "html:<script> alert('" + id + "번 게시물이 삭제되었습니다.'); location.replace('list'); </script>";
 	}
 
 	private String doActionWrite(HttpServletRequest req, HttpServletResponse resp) {
@@ -62,7 +72,7 @@ public class ArticleController extends Controller {
 		}
 
 		int id = Util.getInt(req, "id");
-		
+
 		articleService.increaseHit(id);
 		Article article = articleService.getForPrintArticle(id);
 
@@ -83,15 +93,14 @@ public class ArticleController extends Controller {
 		if (!Util.empty(req, "cateItemId") && Util.isNum(req, "cateItemId")) {
 			cateItemId = Util.getInt(req, "cateItemId");
 		}
-		
+
 		String cateItemName = "전체";
-		
-		if ( cateItemId != 0 ) {
+
+		if (cateItemId != 0) {
 			CateItem cateItem = articleService.getCateItem(cateItemId);
 			cateItemName = cateItem.getName();
 		}
 		req.setAttribute("cateItemName", cateItemName);
-		
 
 		String searchKeywordType = "";
 
@@ -107,7 +116,7 @@ public class ArticleController extends Controller {
 
 		int itemsInAPage = 10;
 		int totalCount = articleService.getForPrintListArticlesCount(cateItemId, searchKeywordType, searchKeyword);
-		
+
 		int totalPage = (int) Math.ceil(totalCount / (double) itemsInAPage);
 
 		req.setAttribute("totalCount", totalCount);
@@ -117,6 +126,7 @@ public class ArticleController extends Controller {
 		List<Article> articles = articleService.getForPrintListArticles(page, itemsInAPage, cateItemId,
 				searchKeywordType, searchKeyword);
 		req.setAttribute("articles", articles);
+
 		return "article/list.jsp";
 	}
 }

@@ -43,23 +43,26 @@
 
 <div class="con">
 	<h1><%=article.getTitle()%></h1>
-	<h3>조회수 : <%=article.getHit()%></h3>
-	<div>
-		이모지 테스트 : 😀😁
-	</div>
+	<h3>
+		조회수 :
+		<%=article.getHit()%></h3>
+	<div>이모지 테스트 : 😀😁</div>
 	
-	
-	
-	<script type="text/x-templete" id="origin1" style="display: none;"><%=article.getBody()%></script>
+	<button><a href="./delete?id=${article.getId()}">게시글삭제</a></button>
+
+
+	<script type="text/x-templete" id="origin1" style="display: none;"><%=article.getBodyForXTemplate()%></script>
 	<div id="viewer1"></div>
 	<script>
-		var editor1__initialValue = $('#origin1').html().trim();
+		var editor1__initialValue = getBodyFromXTemplate('#origin1');
+		console.log(editor1__initialValue);
 		var editor1 = new toastui.Editor({
 			el : document.querySelector('#viewer1'),
 			height : '600px',
 			initialValue : editor1__initialValue,
 			viewer : true,
-			plugins: [toastui.Editor.plugin.codeSyntaxHighlight, youtubePlugin, replPlugin, codepenPlugin]
+			plugins : [ toastui.Editor.plugin.codeSyntaxHighlight,
+					youtubePlugin, replPlugin, codepenPlugin ]
 		});
 	</script>
 </div>

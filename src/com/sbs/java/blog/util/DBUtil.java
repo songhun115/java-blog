@@ -169,9 +169,13 @@ public class DBUtil {
 				} catch (SQLException e) {
 					throw new SQLErrorException("SQL 예외, stmt 닫기, SQL :" + sql, e);
 				}
-			}
+			} 
 		}
 
 		return affectedRows;
+	}
+
+	public static int delete(Connection dbConn, SecSql sql) {
+		return update(dbConn, sql);
 	}
 }

@@ -70,6 +70,13 @@ String cateItemName = (String) request.getAttribute("cateItemName");
 .navber__menu__item:hover {
 	border: 2px solid black;
 }
+
+.article__item>ul {
+	display: none;
+}
+.article__item:hover > ul {
+display:block;
+}
 </style>
 
 
@@ -128,7 +135,12 @@ String cateItemName = (String) request.getAttribute("cateItemName");
 						href="./detail?id=<%=article.getId()%>"><%=article.getRegDate()%></a></span>
 					<span><a href="./detail?id=<%=article.getId()%>"><%=article.getTitle()%></a></span>
 					<span><a href="./detail?id=<%=article.getId()%>"><i
-							class="fas fa-hand-point-left"></i></a></span></li>
+							class="fas fa-hand-point-left"></i></a></span>
+					<ul>
+						<li><button>
+								<a href="./delete?id=<%=article.getId() %>">게시글삭제</a>
+							</button></li>
+					</ul></li>
 				<%
 					}
 				%>

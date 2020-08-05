@@ -33,7 +33,10 @@ public class SecSql {
 		
 		return this;
 	}
-
+	@Override
+	public String toString() {
+		return "sql=" + getFormat() + ", data=" + datas;
+	}
 	public PreparedStatement getPreparedStatement(Connection dbConn) throws SQLException {
 		PreparedStatement stmt = null;
 

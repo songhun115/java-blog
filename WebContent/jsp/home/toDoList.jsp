@@ -70,9 +70,9 @@ const body = document.querySelector("body");
 
 const img__number = 3;
 
-function paintImg(imgNumber) {
+function paintImg(randomNumber) {
   const image = new Image();
-  image.src = `${pageContext.request.contextPath}/resource/imgs/${imgNumber + 1}.jpg`;
+  image.src = '${pageContext.request.contextPath}/resource/imgs/${randomNumber + 1}.jpg';
   image.style.width = "100%";
   image.classList.add("bgImage");
   body.appendChild(image);

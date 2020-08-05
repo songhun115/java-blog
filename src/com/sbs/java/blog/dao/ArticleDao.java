@@ -66,7 +66,7 @@ public class ArticleDao extends Dao {
 	public Article getForPrintArticle(int id) {
 		SecSql sql = new SecSql();
 
-		sql.append("SELECT *, '장희성' AS extra__writer ");
+		sql.append("SELECT *, '정성훈' AS extra__writer ");
 		sql.append("FROM article ");
 		sql.append("WHERE 1 ");
 		sql.append("AND id = ? ", id);
@@ -114,16 +114,26 @@ public class ArticleDao extends Dao {
 		sql.append(", body = ? ", body);
 		sql.append(", displayStatus = '1'");
 		sql.append(", cateItemId = ?", cateItemId);
-		 
+
 		return DBUtil.insert(dbConn, sql);
 	}
+
 // 게시물 조회 함수 
 	public int increaseHit(int id) {
 		SecSql sql = SecSql.from("UPDATE article");
 		sql.append("SET hit = hit + 1");
 		sql.append("WHERE id = ?", id);
-		
+
 		return DBUtil.update(dbConn, sql);
+	}
+// 게시물 삭제 함수
+	public int delete(int id) {
+		SecSql sql = new SecSql();
+
+		sql.append("DELETE FROM article");
+		sql.append("WHERE id = ?", id);
+		
+		return DBUtil.delete(dbConn, sql);
 	}
 
 }

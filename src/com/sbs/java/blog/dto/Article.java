@@ -9,7 +9,6 @@ public class Article extends Dto {
 	private String body;
 	private int hit;
 
-
 	public Article(Map<String, Object> row) {
 		super(row);
 
@@ -22,10 +21,10 @@ public class Article extends Dto {
 
 	@Override
 	public String toString() {
-		return "Article [updateDate=" + updateDate + ", cateItemId=" + cateItemId + ", hit=" + hit + ", title=" + title + ", body="
-				+ body + ", dto=" + super.toString() + "]";
+		return "Article [updateDate=" + updateDate + ", cateItemId=" + cateItemId + ", hit=" + hit + ", title=" + title
+				+ ", body=" + body + ", dto=" + super.toString() + "]";
 	}
-	
+
 	public int getHit() {
 		return hit;
 	}
@@ -62,10 +61,12 @@ public class Article extends Dto {
 		return body;
 	}
 
+	public String getBodyForXTemplate() {
+		return body.replaceAll("(?i)script", "<!--REPLACE:script-->");
+	}
+
 	public void setBody(String body) {
 		this.body = body;
 	}
-	
-	
 
 }
