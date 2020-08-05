@@ -1,3 +1,4 @@
+
 package com.sbs.java.blog.controller;
 
 import java.sql.Connection;
@@ -61,7 +62,8 @@ public class ArticleController extends Controller {
 		}
 
 		int id = Util.getInt(req, "id");
-
+		
+		articleService.increaseHit(id);
 		Article article = articleService.getForPrintArticle(id);
 
 		req.setAttribute("article", article);

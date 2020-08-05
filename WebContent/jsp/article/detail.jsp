@@ -43,10 +43,12 @@
 
 <div class="con">
 	<h1><%=article.getTitle()%></h1>
-	
+	<h3>조회수 : <%=article.getHit()%></h3>
 	<div>
 		이모지 테스트 : 😀😁
 	</div>
+	
+	
 	
 	<script type="text/x-templete" id="origin1" style="display: none;"><%=article.getBody()%></script>
 	<div id="viewer1"></div>
