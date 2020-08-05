@@ -1,0 +1,248 @@
+body,
+ul,
+li {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+h1 {
+  font-size: 60px;
+  margin: 0;
+  margin-top: 100px;
+  margin-bottom: 30px;
+}
+
+h4 {
+  text-align: center;
+  font-size: 2rem;
+  margin: 0;
+  color: #1c1c1c;
+}
+
+body {
+  color: #1c1c1c;
+  font-family: "Open Sans", sans-serif;
+}
+:root {
+  /* color */
+  --color-white: #ffffff;
+  --color-light-white: #eeeeee;
+  --color-dark-white: #bdbdbd;
+  --color-pink: #fe918d;
+  --color-dark-pink: #ff6863;
+  --color-black: #4d4d4d;
+  --color-dark-grey: #4d4d4d;
+  --color-grey: #616161;
+  --color-light-grey: #7c7979;
+  --color-blue: #73aace;
+  --color-right-blue: #2196f4;
+  --color-yellow: #fff7d1;
+  --color-orange: #feb546;
+  --color-black: #000000;
+  --color-green: #cdea12;
+  /*Global End*/
+
+  /* font size */
+  --font-large: 80px;
+  --font-medium: 28px;
+  --font-regular: 18px;
+  --font-small: 16px;
+  --font-mrcro: 14px;
+
+  /* font weight*/
+  --weight-bold: 700;
+  --weight-semi-bold: 600;
+  --weight-regular: 400;
+
+  /* size */
+  --size-border-radius: 4px;
+
+  /* Annimation */
+  --animation-duration: 300ms;
+}
+.form,
+.greetings,
+.icon__box {
+  display: none;
+}
+
+/* 시계 시작 */
+.js-clock > h1 {
+  color: #1c1c1c;
+}
+
+.js-clock {
+  display: column;
+  justify-content: center;
+}
+
+.js-clock > h1,
+h2 {
+  display: flex;
+  justify-content: center;
+}
+
+/* 시계 끝 */
+
+/* 입력 폼 시작  */
+.js__toDoForm {
+  text-align: center;
+}
+.inputing {
+  border: 1px solid black;
+}
+/* 입력 폼 끝  */
+
+/* 리스트 시작  */
+
+.js__toDoList > li {
+  padding: 10px 0;
+  color: #1c1c1c;
+  font-weight: bold;
+  width: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 5px;
+  margin: 5px;
+}
+.js__toDoList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+.js__toDoList > li {
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.js__toDoList > li:hover {
+  background-color: #dfdfdf;
+  transition: 0.3s;
+}
+/* 리스트 끝  */
+
+/* 이미지 애니메이션 시작 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.bgImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  animation: fadeIn 0.5s linear;
+}
+
+.inputing {
+  width: 225px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* 이미지 애니메이션 끝 */
+
+.js__toDoForm {
+  margin-top: 25px;
+}
+
+.js-form {
+  text-align: center;
+}
+.user__Form {
+  font-size: 1.5rem;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+.delBtn {
+  cursor: pointer;
+}
+.icon {
+  color: black;
+  font-size: 1.5rem;
+}
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.icon__box > a > .icon {
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+#nav__bar {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  padding: 10px 0px 10px 0px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: transparent;
+  transition: var(--animation-duration);
+  background-color:rgba(0,0,0,0.5);
+}
+
+.nav__bar__container {
+  display: flex;
+  margin-right: 100px;
+}
+
+#nav__bar.navbar__dark {
+  transition: var(--animation-duration);
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+.navber__menu__item {
+  padding: 8px 12px;
+  margin: 10px;
+
+  cursor: pointer;
+  border-radius: var(--size-border-radius);
+  transition: background-color 0.3s;
+  border: 1px solid transparent;
+  font-weight: var(--weight-semi-bold);
+  color: white;
+  display: block;
+}
+
+.nav__bar__logo {
+  margin-left: 50px;
+}
+
+.nav__bar__logo > img {
+  width: 100px;
+  cursor: pointer;
+}
+
+.nav__bar__menu__icon {
+  cursor: pointer;
+  display: none;
+}
+
+.navber__menu__item.right,
+.navber__menu__item:hover {
+  color: var(--color-green);
+  border: 2px solid var(--color-light-white);
+  border-radius: var(--size-border-radius);
+  transition: var(--animation-duration);
+}
+/* nav__bar End */
