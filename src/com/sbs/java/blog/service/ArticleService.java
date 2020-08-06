@@ -50,6 +50,11 @@ public class ArticleService extends Service {
 		return articleDao.delete(id);
 	}
 
+	public int modify(int cateItemId, String title, String body) {
+		return articleDao.modify(cateItemId, title, body);
+		
+	}
+
 
 
 }

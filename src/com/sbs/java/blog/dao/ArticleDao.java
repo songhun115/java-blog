@@ -136,4 +136,19 @@ public class ArticleDao extends Dao {
 		return DBUtil.delete(dbConn, sql);
 	}
 
+	//게시물 수정 함수
+	public int modify(int cateItemId, String title, String body) {
+		
+		SecSql sql = new SecSql();
+		sql.append("update article");
+		sql.append("SET regDate = NOW()");
+		sql.append(", updateDate = NOW()");
+		sql.append(", title = ? ", title);
+		sql.append(", body = ? ", body);
+		sql.append(", displayStatus = '1'");
+		sql.append(", cateItemId = ?", cateItemId);
+
+		return DBUtil.update(dbConn, sql);
+	}
+
 }

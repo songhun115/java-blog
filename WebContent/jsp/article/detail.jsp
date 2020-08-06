@@ -47,8 +47,14 @@
 		조회수 :
 		<%=article.getHit()%></h3>
 	<div>이모지 테스트 : 😀😁</div>
-	
-	<button><a href="./delete?id=${article.getId()}">게시글삭제</a></button>
+
+	<button>
+		<a href="./delete?id=${article.getId()}">게시글삭제</a>
+	</button>
+	<button>
+		<a href="${pageContext.request.contextPath}/s/article/modify">게시글
+			수정</a>
+	</button>
 
 
 	<script type="text/x-templete" id="origin1" style="display: none;"><%=article.getBodyForXTemplate()%></script>

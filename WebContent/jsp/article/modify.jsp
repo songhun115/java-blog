@@ -1,6 +1,10 @@
+<%@ page import="com.sbs.java.blog.dto.Article"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/jsp/part/head.jspf"%>
+<%
+	Article article = (Article) request.getAttribute("article");
+%>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resource/css/article/write.css" />
 
@@ -63,8 +67,10 @@
 	height: 1000px;
 }
 </style>
+
+<h1>게시글수정</h1>
 <div class="form__container">
-	<form action="doWrite" class="write__form form1">
+	<form action="doModify" class="write__form form1">
 		<div class="form__box">
 			<div class="labal">카테고리선택</div>
 			<div class="input">
@@ -86,13 +92,15 @@
 		<div class="form__box">
 			<div class="labal">제목</div>
 			<div class="input">
-				<input name="title" type="text" placeholder="제목을 입력해주세요." />
+				<input name="title" type="text" placeholder="제목을 입력해주세요."
+					value="" />
 			</div>
 		</div>
 		<div class="form__box">
 			<div class="labal">내용</div>
 			<div class="input">
-				<textarea name="body" placeholder="내용을 입력해주세요."></textarea>
+				<textarea name="body" placeholder="내용을 입력해주세요."
+					value="${article.body}" /></textarea>
 			</div>
 		</div>
 
