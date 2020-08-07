@@ -3,14 +3,21 @@
 <%@ include file="/jsp/part/head.jspf"%>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resource/css/article/write.css" />
-
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resource/css/common.css" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resource/css/article/article.css" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resource/css/home/main.css" />
+<script
+	src="${pageContext.request.contextPath}/resource/js/home/main.js"></script>
+<script src="${pageContext.request.contextPath}/resource/js/common.js"></script>
 <style>
 /* 라이브러리 */
 .form__container {
 	max-width: 1200px;
 	margin-left: auto;
 	margin-right: auto;
-	border: 1px solid red;
 }
 
 .form1 {
@@ -31,11 +38,12 @@
 	width: 100px;
 }
 
-.form1 .form__box>.input {
+.form1 .form__box:not(:last-child)>.input {
 	flex-grow: 1;
 }
 
-.form1 .form__box>.input>input, .form1 .form__box>.input>textarea {
+.form1 .form__box:not(:last-child)>.input>input, .form1 .form__box>.input>textarea
+	{
 	display: block;
 	width: 100%;
 	box-sizing: border-box;
@@ -50,17 +58,64 @@
 	padding: 5px;
 }
 
-@media ( max-width :700px) {
-	.form__box {
-		display: block
+@media ( max-width : 800px) {
+	.form__container {
+		width: 400px;
+	}
+	.join__contarner {
+		width: 400px;
 	}
 }
+
+@media ( max-width : 600px) {
+	.form__container {
+		width: 300px;
+	}
+	.join__contarner {
+		width: 300px;
+	}
+}
+
 /* 커스텀 */
 .form__container {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	height: 1000px;
+}
+
+.join__contarner {
+	width: 700px;
+}
+
+.form__box:not(:last-child) {
+	border: 1px solid gray;
+	border-radius: 5px;
+}
+
+.labal, .input {
+	padding: 10px;
+}
+
+.input>input {
+	border: none;
+	outline: none;
+}
+
+.member>h3 {
+	color: var(- -color-dark-grey);
+}
+
+.labal {
+	font-size: 14px;
+}
+
+.form__box {
+	align-items: center;
+}
+
+.article__container {
+	position: absolute;
 }
 </style>
 
@@ -73,8 +128,6 @@
 			form.loginId.focus();
 			return;
 		}
-
-		
 
 		form.loginPw.value = form.loginPw.value.trim();
 
@@ -119,55 +172,78 @@
 		form.submit();
 	}
 </script>
+
+
+<div class="article__container">
+
+	<div class="bg__item">
+		<img src="${pageContext.request.contextPath}/resource/imgs/bg2.jpg"
+			alt="" />
+	</div>
+	<div class="bg__item">
+		<img src="${pageContext.request.contextPath}/resource/imgs/bg1.jpg"
+			alt="" />
+	</div>
+	<div class="bg__item">
+		<img src="${pageContext.request.contextPath}/resource/imgs/bg3.jpg"
+			alt="" />
+	</div>
+</div>
 <div class="form__container">
-	<form action="doJoin" method="POST" class="join__form form1"
-		onsubmit="submitJoinForm(this); return false;">
+	<div class="join__contarner">
+		<div class="member">
+			<h3>
+				회원 정보 입력
+				</h2>
+		</div>
+		<form action="doJoin" method="POST" class="join__form form1"
+			onsubmit="submitJoinForm(this); return false;">
 
-		<div class="form__box">
-			<div class="labal">아이디</div>
-			<div class="input">
-				<input name="loginId" type="text" placeholder="아이디를 입력해주세요." />
+			<div class="form__box">
+				<div class="labal">아이디</div>
+				<div class="input">
+					<input name="loginId" type="text" placeholder="아이디를 입력해주세요." />
+				</div>
 			</div>
-		</div>
-		<div class="form__box">
-			<div class="labal">비밀번호</div>
-			<div class="input">
-				<input name="loginPw" type="password" placeholder="비밀번호를 입력해주세요." />
+			<div class="form__box">
+				<div class="labal">비밀번호</div>
+				<div class="input">
+					<input name="loginPw" type="password" placeholder="비밀번호를 입력해주세요." />
+				</div>
 			</div>
-		</div>
-		<div class="form__box">
-			<div class="labal">비밀번호 확인</div>
-			<div class="input">
-				<input name="loginPwconfirm" type="password"
-					placeholder="비밀번호확인을 입력해주세요." />
+			<div class="form__box">
+				<div class="labal">비밀번호 확인</div>
+				<div class="input">
+					<input name="loginPwconfirm" type="password"
+						placeholder="비밀번호확인을 입력해주세요." />
+				</div>
 			</div>
-		</div>
-		<div class="form__box">
-			<div class="labal">이름</div>
-			<div class="input">
-				<input name="name" type="text" placeholder="이름을 입력해주세요." />
+			<div class="form__box">
+				<div class="labal">이름</div>
+				<div class="input">
+					<input name="name" type="text" placeholder="이름을 입력해주세요." />
+				</div>
 			</div>
-		</div>
-		<div class="form__box">
-			<div class="labal">닉네임</div>
-			<div class="input">
-				<input name="nickname" type="text" placeholder="닉네임을 입력해주세요." />
+			<div class="form__box">
+				<div class="labal">닉네임</div>
+				<div class="input">
+					<input name="nickname" type="text" placeholder="닉네임을 입력해주세요." />
+				</div>
 			</div>
-		</div>
-		<div class="form__box">
-			<div class="labal">email</div>
-			<div class="input">
-				<input name="email" type="email" placeholder="이메일을 입력해주세요." />
+			<div class="form__box">
+				<div class="labal">email</div>
+				<div class="input">
+					<input name="email" type="email" placeholder="이메일을 입력해주세요." />
+				</div>
 			</div>
-		</div>
 
 
-		<div class="form__box">
-			<div class="labal">전송</div>
-			<div class="input">
-				<input type="submit" value="전송" /> <a href="../home/main">취소</a>
+			<div class="form__box">
+				<div class="input">
+					<input type="submit" value="전송" /> <a href="../home/main">취소</a>
+				</div>
 			</div>
-		</div>
-	</form>
+		</form>
+	</div>
 </div>
 <%@ include file="/jsp/part/foot.jspf"%>

@@ -1,0 +1,150 @@
+body {
+	height: 100%;
+	font-family: "Open Sans", sans-serif;
+}
+
+.article__container {
+	position: relative;
+	height: 100%;
+	width: 100%;
+}
+
+.bg__item {
+	position: absolute;
+	z-index: -1;
+}
+
+.bg__item>img {
+	width: 700px;
+}
+
+.bg__item:first-child {
+	top: 0;
+	right: 0;
+	z-index: -1;
+}
+
+.bg__item:first-child>img {
+	width: 500px;
+	opacity: 0.6;
+}
+
+.bg__item:nth-child(2) {
+	top: 0;
+	left: 0;
+}
+
+.bg__item:nth-child(2)>img {
+	width: 300px;
+}
+
+.bg__item:nth-child(3) {
+	bottom: 0;
+	left: 0;
+	z-index: -2;
+}
+
+.bg__item:nth-child(3)>img {
+	opacity: 0.5;
+}
+
+.detail__box {
+	margin-top: 200px;
+	width: 100%;
+}
+
+.detail__container {
+	margin-top: 200px;
+	height: auto;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	max-width: 1000px;
+	margin: auto;
+}
+
+.detail__title {
+	font-size: 30px;
+	padding-bottom: 20px;
+	width: 80%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.detail__item {
+	padding: 0px 15px 0px 0px;
+	color: gray;
+	position: relative;
+}
+
+.detail__item:not(:last-child)::before {
+	clear: both;
+	content: "";
+	position: absolute;
+	top: 7px;
+	right: 7px;
+	width: 1px;
+	height: 10px;
+	background-color: gray;
+}
+
+.detail__list {
+	width: 100%;
+}
+
+.detail__ul {
+	width: 100%;
+	display: flex;
+	padding-bottom: 15px;
+	border-bottom: 1px solid black;
+}
+
+.detail__title {
+	font-size: 22px;
+	padding-bottom: 5px;
+	font-weight: bold;
+}
+
+.detail__body {
+	width: 100%;
+	padding: 20px 0;
+	border-bottom: 1px solid black;
+}
+
+@media ( max-width : 800px) {
+	.bg__item:nth-child(3)>img {
+		width: 300px
+	}
+	.bg__item:first-child {
+		display: none;
+	}
+	
+}
+
+@media ( max-width : 600px) {
+	.detail__item {
+		font-size: 12px;
+	}
+	.detail__item {
+		padding: 0px 7px 0px 0px;
+		white-space: nowrap;
+	}
+	.detail__item:not(:last-child)::before {
+		clear: both;
+		content: "";
+		position: absolute;
+		top: 5px;
+		right: 3px;
+		width: 1px;
+		height: 7px;
+		background-color: gray;
+	}
+	.article__container {
+		height: 100%;
+	}
+	html, body {
+		height: 100%;
+	}
+}

@@ -87,6 +87,7 @@ String cateItemName = (String) request.getAttribute("cateItemName");
 .article__item button {
 	opacity: 0;
 	transition: 0.3s;
+	padding: 3px;
 }
 
 .article__item:hover button {

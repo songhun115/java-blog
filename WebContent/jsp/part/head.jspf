@@ -36,19 +36,27 @@
 </head>
 
 <body>
-	 <nav id="nav__bar">
-      <div class="nav__bar__logo">
-        <img  src="${pageContext.request.contextPath}/resource/imgs/logo.png" alt="" />
-        
-      </div>
-      <ul class="nav__bar__container right">
-        <li><a class="navber__menu__item right" href="${pageContext.request.contextPath}/s/home/main">Home</a></li>
-        <li><a class="navber__menu__item right" href="${pageContext.request.contextPath}/s/article/list">Artilce</a></li>
-        <li><a class="navber__menu__item right" href="${pageContext.request.contextPath}/s/home/aboutMe">About Me</a></li>
-        <li><a class="navber__menu__item right" href="${pageContext.request.contextPath}/jsp/home/toDoList.jsp">To Do List</a></li>
-        <li><a class="navber__menu__item right" href="${pageContext.request.contextPath}/jsp/home/project.jsp">Project</a></li>
-      </ul>
-      <div class="nav__bar__menu__icon">
-        <i class="fas fa-bars menu__icon"></i>
-      </div>
-    </nav>
+	<nav id="nav__bar">
+		<div class="nav__bar__logo">
+			<img src="${pageContext.request.contextPath}/resource/imgs/logo.png"
+				alt="" />
+
+		</div>
+		<ul class="nav__bar__container right">
+			<li><a class="navber__menu__item right"
+				href="${pageContext.request.contextPath}/s/home/main">Home</a></li>
+			<li><a class="navber__menu__item right"
+				href="${pageContext.request.contextPath}/s/article/list">Artilce</a></li>
+			<li><a class="navber__menu__item right"
+				href="${pageContext.request.contextPath}/s/home/aboutMe">About
+					Me</a></li>
+			<li><a class="navber__menu__item right"
+				href="${pageContext.request.contextPath}/jsp/home/toDoList.jsp">To
+					Do List</a></li>
+			<li><a class="navber__menu__item right"
+				href="${pageContext.request.contextPath}/jsp/home/project.jsp">Project</a></li>
+		</ul>
+		<div class="nav__bar__menu__icon">
+			<i class="fas fa-bars menu__icon"></i>
+		</div>
+	</nav>

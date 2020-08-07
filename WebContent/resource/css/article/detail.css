@@ -1,6 +1,4 @@
-h1 {
-    margin-bottom: 60px;
-}
+
 /*
 h1::after {
     content: "";
@@ -10,3 +8,44 @@ h1::after {
     margin-left: auto;
     margin-right: auto;
 }*/
+body{
+	position: relative;
+}
+.bg__item {
+	position: absolute;
+	z-index: -1;
+}
+
+.bg__item>img {
+	width: 700px;
+}
+
+.bg__item:first-child {
+	top: 0;
+	right: 0;
+	z-index: -1;
+}
+
+.bg__item:first-child>img {
+	width: 500px;
+	opacity: 0.6;
+}
+
+.bg__item:nth-child(2) {
+	top: 0;
+	left: 0;
+}
+
+.bg__item:nth-child(2)>img {
+	width: 300px;
+}
+
+.bg__item:last-child {
+	buttom: 0;
+	left: 0;
+	z-index: -2;
+}
+
+.bg__item:nth-child(3)>img {
+	opacity: 0.5;
+}

@@ -71,6 +71,8 @@
 <h1>게시글수정</h1>
 <div class="form__container">
 	<form action="doModify" class="write__form form1">
+	
+	
 		<div class="form__box">
 			<div class="labal">카테고리선택</div>
 			<div class="input">
@@ -89,6 +91,7 @@
 			</div>
 		</div>
 
+
 		<div class="form__box">
 			<div class="labal">제목</div>
 			<div class="input">
@@ -96,6 +99,8 @@
 					value="" />
 			</div>
 		</div>
+		
+	
 		<div class="form__box">
 			<div class="labal">내용</div>
 			<div class="input">
