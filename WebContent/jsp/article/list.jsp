@@ -3,6 +3,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/jsp/part/head.jspf"%>
+<script
+	src="${pageContext.request.contextPath}/resource/js/home/main.js"></script>
 <%
 	List<Article> articles = (List<Article>) request.getAttribute("articles");
 int totalPage = (int) request.getAttribute("totalPage");
@@ -10,12 +12,13 @@ int paramPage = (int) request.getAttribute("page");
 String cateItemName = (String) request.getAttribute("cateItemName");
 %>
 <!-- 하이라이트 라이브러리 추가, 토스트 UI 에디터에서 사용됨 -->
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resource/css/home/main.css" />
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resource/css/home/common.css" />
+
 <!-- 하이라이트 라이브러리, 언어 -->
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/css.min.js"></script>
@@ -47,6 +50,8 @@ String cateItemName = (String) request.getAttribute("cateItemName");
 	href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resource/css/article/list.css" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resource/css/home/common.css" />
 
 <style>
 .page-box>ul>li>a {
@@ -71,17 +76,147 @@ String cateItemName = (String) request.getAttribute("cateItemName");
 	border: 2px solid black;
 }
 
-.article__item>ul {
-	display: none;
+.right__box {
+	display: flex;
 }
-.article__item:hover > ul {
-display:block;
+
+.right__box>li {
+	width: 100%;
+}
+
+.article__item button {
+	opacity: 0;
+	transition: 0.3s;
+}
+
+.article__item:hover button {
+	opacity: 1;
+	transition: 0.3s;
+}
+
+@media ( max-width : 800px) {
+	.head__name>h1 {
+		font-size: 60px;
+		line-height: 60px;
+	}
+	.article__item>span:nth-child(1), .article__item>span:nth-child(2),
+		.article__item>span:nth-child(3), .article__item>span:nth-child(4) {
+		float: none;
+	}
+	/* 카테고리 시작 */
+	.category__list {
+		justify-content: center;
+	}
+	.category__list>div {
+		display: none;
+	}
+	.category__item {
+		padding: 5px;
+		font-size: 12px;
+		display: flex;
+		flex-wrap: wrap;
+	}
+	.category__item>a {
+		white-space: nowrap;
+		boerder: 1px solid red;
+	}
+	.category__item:not(:last-child)::before {
+		position: absolute;
+		clear: both;
+		content: "";
+		top: 20%;
+		right: 0;
+		width: 1px;
+		height: 50%;
+		background-color: black;
+	}
+
+	/* 카테고리 끝 */
+
+	/* 폼 시작 */
+	.right__box {
+		display: none;
+	}
+	.search-box {
+		display: flex;
+		justify-content: center;
+	}
+	.search-box  button {
+		font-size: 14px;
+	}
+	/* 폼 끝 */
+
+	/* 게시물 시작 */
+	.article__item {
+		flex: none;
+	}
+	.article__box {
+		margin: 0;
+	}
+	.article__item {
+		padding: 10px 5px;
+		height: auto;
+	}
+	.article__item>span {
+		padding: 5px;
+	}
+	.article__item>span:not(:last-child)>a {
+		font-size: 12px;
+	}
+	.
+	.article__item>span>a {
+		color: )
+	}
+	.article__item>span:nth-child(2) {
+		white-space: nowrap;
+	}
+	.article__item>span:nth-child(3) {
+		overflow: hidden;
+		width: 90%;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		display: block;
+	}
+	.article__item>span:not(:nth-child(3))>a {
+		font-size: 14px;
+	}
+	.article__item>span:nth-child(3)>a {
+		font-size: 16px;
+	}
+	.article__item>span:nth-child(4) {
+		display: none;
+	}
+	/* 게시물 끝 */
+
+	/* 배경 이미지 시작 */
+	.bg__item:nth-child(3)>img {
+		width: 300px
+	}
+	.bg__item:first-child {
+		display: none;
+	}
+
+	/* 배경 이미지 끝*/
 }
 </style>
 
 
 
 <div class="article__container">
+
+	<div class="bg__item">
+		<img src="${pageContext.request.contextPath}/resource/imgs/bg2.jpg"
+			alt="" />
+	</div>
+	<div class="bg__item">
+		<img src="${pageContext.request.contextPath}/resource/imgs/bg1.jpg"
+			alt="" />
+	</div>
+	<div class="bg__item">
+		<img src="${pageContext.request.contextPath}/resource/imgs/bg3.jpg"
+			alt="" />
+	</div>
+
 
 	<div class="head__name">
 		<h1>
@@ -97,7 +232,9 @@ display:block;
 					name="cateItemId" value="${param.cateItemId}" /> <input
 					type="hidden" name="searchKeywordType" value="title" /> <input
 					type="text" name="searchKeyword" value="${param.searchKeyword}" />
-				<button type="submit">검색</button>
+				<button type="submit">
+					</a>검색
+				</button>
 			</form>
 			<div class="write">
 				<button class="write__btn">
@@ -125,22 +262,30 @@ display:block;
 		</ul>
 
 
+
+
 		<div class="con article__box">
 			<ul class="article__list">
 				<%
 					for (Article article : articles) {
 				%>
-				<li class="article__item"><span><a
-						href="./detail?id=<%=article.getId()%>"><%=cateItemName%></a></span> <span><a
-						href="./detail?id=<%=article.getId()%>"><%=article.getRegDate()%></a></span>
-					<span><a href="./detail?id=<%=article.getId()%>"><%=article.getTitle()%></a></span>
-					<span><a href="./detail?id=<%=article.getId()%>"><i
-							class="fas fa-hand-point-left"></i></a></span>
-					<ul>
-						<li><button>
-								<a href="./delete?id=<%=article.getId() %>">게시글삭제</a>
-							</button></li>
-					</ul></li>
+				<li class="article__item"><span> <a
+						href="./detail?id=<%=article.getId()%>"><%=cateItemName%></a>
+				</span> <span> <a href="./detail?id=<%=article.getId()%>"><%=article.getRegDate()%></a>
+				</span> <span> <a href="./detail?id=<%=article.getId()%>"><%=article.getTitle()%></a>
+				</span> <span>
+						<ul class="right__box">
+							<li>
+								<button>
+									<a href="./delete?id=<%=article.getId()%>">삭제</a>
+								</button>
+							</li>
+							<li>
+								<button>
+									<a href="./modify?id=<%=article.getId()%>">수정</a>
+								</button>
+							</li>
+						</ul> </sapn></li>
 				<%
 					}
 				%>
