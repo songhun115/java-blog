@@ -1,0 +1,59 @@
+
+
+/* 라이브러리 */
+.form__container {
+	max-width: 1200px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.form1 {
+	display: block;
+	width: 100%;
+}
+
+.form__box {
+	display: flex;
+	align-items: center;
+}
+
+.form1 .form__box:not(:first-child) {
+	margin-top: 10px;
+}
+
+
+
+.form1 .form__box>.input {
+	flex-grow: 1;
+}
+
+.form1 .form__box>.input>input, .form1 .form__box>.input>textarea {
+	display: block;
+	width: 100%;
+	box-sizing: border-box;
+	padding: 10px;
+}
+
+.form1 .form__box>.input>textarea {
+	height: 500px;
+}
+
+.form1 .form__box>.input>select {
+	padding: 5px;
+}
+
+@media ( max-width :700px) {
+	.form__box {
+		display: block
+	}
+}
+/* 커스텀 */
+.form__container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+}
+.article__container {
+	z-index:-1;
+}
