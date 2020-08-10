@@ -1,0 +1,112 @@
+.form__container {
+	max-width: 1200px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.form1 {
+	display: block;
+	width: 100%;
+}
+
+.form__box {
+	display: flex;
+	align-items: center;
+}
+
+.form1 .form__box:not(:first-child) {
+	margin-top: 10px;
+}
+
+.form1 .form__box>.labal {
+	width: 100px;
+}
+
+.form1 .form__box:not(:last-child)>.input {
+	flex-grow: 1;
+}
+
+.form1 .form__box:not(:last-child)>.input>input, .form1 .form__box>.input>textarea
+	{
+	display: block;
+	width: 100%;
+	box-sizing: border-box;
+	padding: 10px;
+}
+
+.form1 .form__box>.input>textarea {
+	height: 500px;
+}
+
+.form1 .form__box>.input>select {
+	padding: 5px;
+}
+
+@media ( max-width : 800px) {
+	.form__container {
+		width: 400px;
+	}
+	.join__contarner {
+		width: 400px;login__contarner
+	}
+	.login__contarner {
+		width: 400px;login__contarner
+	}
+}
+
+@media ( max-width : 600px) {
+	.form__container {
+		width: 300px;
+	}
+	.join__contarner {
+		width: 300px;
+	}
+	.login__contarner {
+		width: 300px;
+	}
+}
+
+/* 커스텀 */
+.form__container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 1000px;
+}
+
+.join__contarner {
+	width: 700px;
+}
+.login__contarner {
+	width: 700px;
+}
+
+.form__box {
+	border: 1px solid gray;
+	border-radius: 5px;
+}
+
+.labal, .input {
+	padding: 10px;
+}
+
+.input>input {
+	border: none;
+	outline: none;
+}
+
+.member>h3 {
+	color: var(- -color-dark-grey);
+}
+
+.labal {
+	font-size: 14px;
+}
+
+.form__box {
+	align-items: center;
+}
+
+.article__container {
+	position: absolute;
+}

@@ -34,4 +34,31 @@ public class MemberDao extends Dao {
 
 		return DBUtil.insert(dbConn, sql);
 	}
+
+	public boolean isJoinableNickname(String nickname) {
+		SecSql sql = SecSql.from("SELECT COUNT(*) AS cnt");
+		sql.append("FROM `member`");
+		sql.append("WHERE nickname = ?", nickname);
+		
+		return DBUtil.selectRowIntValue(dbConn, sql) == 0;
+		
+		
+	}
+
+	public boolean isJoinableEmail(String email) {
+		SecSql sql = SecSql.from("SELECT COUNT(*) AS cnt");
+		sql.append("FROM `member`");
+		sql.append("WHERE email = ?", email);
+		
+		return DBUtil.selectRowIntValue(dbConn, sql) == 0;
+	}
+
+	public int getMemberByLoginIdAndLoginPw(String loginId, String loginPw) {
+		SecSql sql = SecSql.from("SELECT id");
+		sql.append("FROM `member`");
+		sql.append("WHERE loginId = ?", loginId);
+		sql.append("AND  loginPw = ?", loginPw);
+
+		return DBUtil.selectRowIntValue(dbConn, sql);
+	}
 }

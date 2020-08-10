@@ -17,7 +17,7 @@
 <script src="${pageContext.request.contextPath}/resource/js/common.js"></script>
 
 <script>
-	function submitJoinForm(form) {
+	function submitLoginForm(form) {
 		form.loginId.value = form.loginId.value.trim();
 
 		if (form.loginId.value.length == 0) {
@@ -34,41 +34,10 @@
 			return;
 		}
 
-		form.loginPwconfirm.value = form.loginPwconfirm.value.trim();
-
-		if (form.loginPwconfirm.value.length == 0) {
-			alert('로그인 비밀번호확인 입력해주세요.');
-			form.loginPwconfirm.focus();
-			return;
-		}
-
-		form.name.value = form.name.value.trim();
-
-		if (form.name.value.length == 0) {
-			alert('이름을 입력해주세요.');
-			form.name.focus();
-			return;
-		}
-
-		form.nickname.value = form.nickname.value.trim();
-
-		if (form.nickname.value.length == 0) {
-			alert('닉네임을 입력해주세요.');
-			form.nickname.focus();
-			return;
-		}
-
-		form.email.value = form.email.value.trim();
-
-		if (form.email.value.length == 0) {
-			alert('이메일 입력해주세요.');
-			form.email.focus();
-			return;
-		}
+		
 
 		  form.loginPwReal.value = sha256(form.loginPw.value);
 		  form.loginPw.value= '';
-		  form.loginPwconfirm.value= '';
 		  
 		form.submit();
 	}
@@ -91,14 +60,14 @@
 	</div>
 </div>
 <div class="form__container">
-	<div class="join__contarner">
+	<div class="login__contarner">
 		<div class="member">
 			<h3>
 				회원 정보 입력
 				</h2>
 		</div>
-		<form action="doJoin" method="POST" class="join__form form1"
-			onsubmit="submitJoinForm(this); return false;">
+		<form action="doLogin" method="POST" class="login__form form1"
+			onsubmit="submitLoginForm(this); return false;">
 			<input type="hidden" name="loginPwReal" />
 			<div class="form__box">
 				<div class="labal">아이디</div>
@@ -112,38 +81,14 @@
 					<input name="loginPw" type="password" placeholder="비밀번호를 입력해주세요." />
 				</div>
 			</div>
+			
 			<div class="form__box">
-				<div class="labal">비밀번호 확인</div>
-				<div class="input">
-					<input name="loginPwconfirm" type="password"
-						placeholder="비밀번호확인을 입력해주세요." />
-				</div>
-			</div>
-			<div class="form__box">
-				<div class="labal">이름</div>
-				<div class="input">
-					<input name="name" type="text" placeholder="이름을 입력해주세요." />
-				</div>
-			</div>
-			<div class="form__box">
-				<div class="labal">닉네임</div>
-				<div class="input">
-					<input name="nickname" type="text" placeholder="닉네임을 입력해주세요." />
-				</div>
-			</div>
-			<div class="form__box">
-				<div class="labal">email</div>
-				<div class="input">
-					<input name="email" type="email" placeholder="이메일을 입력해주세요." />
-				</div>
-			</div>
-
-
-			<div class="form__box">
+			<div class="laber">전송</div>
 				<div class="input">
 					<input type="submit" value="전송" /> <a href="../home/main">취소</a>
 				</div>
 			</div>
+			
 		</form>
 	</div>
 </div>
