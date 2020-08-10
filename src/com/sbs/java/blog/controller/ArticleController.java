@@ -26,24 +26,24 @@ public class ArticleController extends Controller {
 	public String doAction() {
 		switch (actionMethodName) {
 		case "list":
-			return doActionList(req, resp);
+			return doActionList();
 		case "detail":
-			return doActionDetail(req, resp);
+			return doActionDetail();
 		case "doWrite":
-			return doActionDoWrite(req, resp);
+			return doActionDoWrite();
 		case "write":
-			return doActionWrite(req, resp);
+			return doActionWrite();
 		case "delete":
-			return doActionDelete(req, resp);
+			return doActionDelete();
 		case "modify":
-			return doActionModify(req, resp);
+			return doActionModify();
 		case "doModify":
-			return doActionDoModify(req, resp);
+			return doActionDoModify();
 		} 
 		return "";
 	}
 
-	private String doActionDelete(HttpServletRequest req, HttpServletResponse resp) {
+	private String doActionDelete() {
 		int id = Util.getInt(req, "id");
 		System.out.println(id);
 		articleService.delete(id);
@@ -51,11 +51,11 @@ public class ArticleController extends Controller {
 		return "html:<script> alert('" + id + "번 게시물이 삭제되었습니다.'); location.replace('list'); </script>";
 	}
 
-	private String doActionModify(HttpServletRequest req, HttpServletResponse resp) {
+	private String doActionModify() {
 		return "article/modify.jsp";
 	}
 	
-	private String doActionDoModify(HttpServletRequest req, HttpServletResponse resp) {
+	private String doActionDoModify() {
 		String title = req.getParameter("title");
 		String body = req.getParameter("body");
 		int cateItemId = Util.getInt(req, "cateItemId");
@@ -65,11 +65,11 @@ public class ArticleController extends Controller {
 		return "html:<script> alert('" + id + "번 게시물이 수정되었습니다.'); location.replace('list'); </script>";
 	}
 
-	private String doActionWrite(HttpServletRequest req, HttpServletResponse resp) {
+	private String doActionWrite() {
 		return "article/write.jsp";
 	}
 
-	private String doActionDoWrite(HttpServletRequest req, HttpServletResponse resp) {
+	private String doActionDoWrite() {
 		String title = req.getParameter("title");
 		String body = req.getParameter("body");
 		int cateItemId = Util.getInt(req, "cateItemId");
@@ -79,7 +79,7 @@ public class ArticleController extends Controller {
 		return "html:<script> alert('" + id + "번 게시물이 생성되었습니다.'); location.replace('list'); </script>";
 	}
 
-	private String doActionDetail(HttpServletRequest req, HttpServletResponse resp) {
+	private String doActionDetail() {
 		if (Util.empty(req, "id")) {
 			return "html:id를 입력해주세요.";
 		}
@@ -98,7 +98,7 @@ public class ArticleController extends Controller {
 		return "article/detail.jsp";
 	}
 
-	private String doActionList(HttpServletRequest req, HttpServletResponse resp) {
+	private String doActionList() {
 		int page = 1;
 
 		if (!Util.empty(req, "page") && Util.isNum(req, "page")) {

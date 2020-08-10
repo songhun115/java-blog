@@ -5,24 +5,31 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.sbs.java.blog.dto.CateItem;
+import com.sbs.java.blog.dto.Member;
 import com.sbs.java.blog.service.ArticleService;
+import com.sbs.java.blog.service.MemberService;
 
 public abstract class Controller {
 	protected Connection dbConn;
 	protected String actionMethodName;
 	protected HttpServletRequest req;
 	protected HttpServletResponse resp;
+	protected HttpSession session;
 
 	protected ArticleService articleService;
+	protected MemberService memberService;
 
 	public Controller(Connection dbConn, String actionMethodName, HttpServletRequest req, HttpServletResponse resp) {
 		this.dbConn = dbConn;
 		this.actionMethodName = actionMethodName;
 		this.req = req;
+		this.session = req.getSession();
 		this.resp = resp;
 		articleService = new ArticleService(dbConn);
+		memberService = new MemberService(dbConn);
 	}
 
 	public void beforeAction() {
@@ -31,6 +38,23 @@ public abstract class Controller {
 		List<CateItem> cateItems = articleService.getForPrintCateItems();
 		
 		req.setAttribute("cateItems", cateItems);
+		
+		// 사용자 관련 정보를 리퀘스트 객체에 정리해서 넣기 
+		int logindMemberId = -1;
+		boolean isLogind = false;
+		Member logindMember = null;
+
+		if (session.getAttribute("logindMemberId") != null) {
+			logindMemberId = (int) session.getAttribute("logindMemberId");
+			isLogind = true;
+			logindMember = memberService.getMemberId(logindMemberId);
+		}
+
+		req.setAttribute("logindMember", logindMember);
+		req.setAttribute("isLogind", isLogind);
+		req.setAttribute("logindMemberId", logindMemberId);
+
+		
 	}
 
 	public void afterAction() {

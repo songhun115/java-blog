@@ -3,6 +3,7 @@ package com.sbs.java.blog.service;
 import java.sql.Connection;
 
 import com.sbs.java.blog.dao.MemberDao;
+import com.sbs.java.blog.dto.Member;
 
 public class MemberService extends Service {
 	private MemberDao memberDao;
@@ -30,5 +31,9 @@ public class MemberService extends Service {
 
 	public int getMemberByLoginIdAndLoginPw(String loginId, String loginPw) {
 		return memberDao.getMemberByLoginIdAndLoginPw(loginId,loginPw);
+	}
+
+	public Member getMemberId(int id) {
+		return memberDao.getMemberId(id);
 	}
 }

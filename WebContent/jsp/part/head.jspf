@@ -1,9 +1,13 @@
 <%@ page import="java.util.List"%>
 <%@ page import="com.sbs.java.blog.dto.CateItem"%>
+<%@ page import="com.sbs.java.blog.dto.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
 	List<CateItem> cateItems = (List<CateItem>) request.getAttribute("cateItems");
+int logindMemberId = (int) request.getAttribute("logindMemberId");
+Member logindMember = (Member) request.getAttribute("logindMember");
+boolean isLogind = (boolean) request.getAttribute("isLogind");
 %>
 
 <!DOCTYPE html>
@@ -43,6 +47,7 @@
 
 		</div>
 		<ul class="nav__bar__container right">
+
 			<li><a class="navber__menu__item right"
 				href="${pageContext.request.contextPath}/s/home/main">Home</a></li>
 			<li><a class="navber__menu__item right"

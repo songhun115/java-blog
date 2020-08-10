@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/jsp/part/head.jspf"%>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resource/css/article/write.css" />
 <link rel="stylesheet"
@@ -10,8 +11,9 @@
 	href="${pageContext.request.contextPath}/resource/css/article/article.css" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resource/css/home/main.css" />
-	<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resource/css/member/member.css" />FT
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resource/css/member/member.css" />
+FT
 <script
 	src="${pageContext.request.contextPath}/resource/js/home/main.js"></script>
 <script src="${pageContext.request.contextPath}/resource/js/common.js"></script>
@@ -34,11 +36,9 @@
 			return;
 		}
 
-		
+		form.loginPwReal.value = sha256(form.loginPw.value);
+		form.loginPw.value = '';
 
-		  form.loginPwReal.value = sha256(form.loginPw.value);
-		  form.loginPw.value= '';
-		  
 		form.submit();
 	}
 </script>
@@ -81,14 +81,14 @@
 					<input name="loginPw" type="password" placeholder="비밀번호를 입력해주세요." />
 				</div>
 			</div>
-			
+
 			<div class="form__box">
-			<div class="laber">전송</div>
+				<div class="laber">전송</div>
 				<div class="input">
 					<input type="submit" value="전송" /> <a href="../home/main">취소</a>
 				</div>
 			</div>
-			
+
 		</form>
 	</div>
 </div>
