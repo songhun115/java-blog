@@ -39,7 +39,7 @@ public class ArticleController extends Controller {
 			return doActionModify();
 		case "doModify":
 			return doActionDoModify();
-		} 
+		}
 		return "";
 	}
 
@@ -51,15 +51,16 @@ public class ArticleController extends Controller {
 		return "html:<script> alert('" + id + "번 게시물이 삭제되었습니다.'); location.replace('list'); </script>";
 	}
 
+
 	private String doActionModify() {
 		return "article/modify.jsp";
 	}
-	
+
 	private String doActionDoModify() {
 		String title = req.getParameter("title");
 		String body = req.getParameter("body");
 		int cateItemId = Util.getInt(req, "cateItemId");
-		
+
 		int id = articleService.modify(cateItemId, title, body);
 
 		return "html:<script> alert('" + id + "번 게시물이 수정되었습니다.'); location.replace('list'); </script>";

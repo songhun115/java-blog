@@ -3,6 +3,7 @@
 <%@ include file="/jsp/part/head.jspf"%>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resource/css/home/project.css" />
+	
 <section id="home">
 	<div class="home__bg">
 		<img src="${pageContext.request.contextPath}/resource/imgs/bg.jpg"

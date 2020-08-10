@@ -20,11 +20,24 @@ public class HomeController extends Controller {
 			return doActionMain();
 		case "aboutMe":
 			return doActionAboutMe();
+		case "project":
+			return doActionProject();
+		case "toDoList":
+			return doActionToDoList();
 		}
 
 		return "";
 	}
 
+	private String doActionToDoList() {
+		return "home/toDoList.jsp";
+	}
+
+	private String doActionProject() {
+		return "home/project.jsp";
+	}
+
+	
 	private String doActionAboutMe() {
 		return "home/aboutMe.jsp";
 	}

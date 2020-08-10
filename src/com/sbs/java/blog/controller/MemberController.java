@@ -10,11 +10,10 @@ import com.sbs.java.blog.service.MemberService;
 
 public class MemberController extends Controller {
 
-
 	public MemberController(Connection dbConn, String actionMethodName, HttpServletRequest req,
 			HttpServletResponse resp) {
 		super(dbConn, actionMethodName, req, resp);
-		
+
 	}
 
 	@Override
@@ -28,26 +27,31 @@ public class MemberController extends Controller {
 			return doActionLogin();
 		case "doLogin":
 			return doActionDoLogin();
-		} 
-		
+		case "doLogout":
+			return doActionDoLogout();
+		}
+
 		return "";
 	}
-
-
 
 	private String doActionDoLogin() {
 		String loginId = req.getParameter("loginId");
 		String loginPw = req.getParameter("loginPwReal");
-		
-		
-		int logindMemberId = memberService.getMemberByLoginIdAndLoginPw(loginId,loginPw);
+
+		int logindMemberId = memberService.getMemberByLoginIdAndLoginPw(loginId, loginPw);
 		if (logindMemberId == -1) {
-			return String.format("html:<script> alert('존재하지 않는 회원입니다.');history.back(); </script>",loginId);
+			return String.format("html:<script> alert('존재하지 않는 회원입니다.');history.back(); </script>", loginId);
 		}
 		HttpSession session = req.getSession();
-		session.setAttribute("logindMemberId",logindMemberId);
-		
+		session.setAttribute("logindMemberId", logindMemberId);
+
 		return String.format("html:<script> alert('로그인 되었습니다'); location.replace('../home/main'); </script>");
+	}
+
+	private String doActionDoLogout() {
+		session.removeAttribute("logindMemberId");
+
+		return String.format("html:<script> alert('로그아웃 되었습니다'); location.replace('../home/main'); </script>");
 	}
 
 	private String doActionLogin() {
@@ -64,30 +68,26 @@ public class MemberController extends Controller {
 		boolean isJoinableLoginId = memberService.isJoinableLoginId(loginId);
 		boolean isJoinableNickname = memberService.isJoinableNickname(nickname);
 		boolean isJoinableEmail = memberService.isJoinableEmail(email);
-		
+
 		if (isJoinableLoginId == false) {
-			return String.format("html:<script> alert('%s(은)는 이미 사용중인 아이디 입니다.');history.back(); </script>",loginId);
+			return String.format("html:<script> alert('%s(은)는 이미 사용중인 아이디 입니다.');history.back(); </script>", loginId);
 		}
-		
+
 		if (isJoinableNickname == false) {
-			return String.format("html:<script> alert('%s(은)는 이미 사용중인 닉네임 입니다.');history.back(); </script>",nickname);
+			return String.format("html:<script> alert('%s(은)는 이미 사용중인 닉네임 입니다.');history.back(); </script>", nickname);
 		}
-		
+
 		if (isJoinableEmail == false) {
-			return String.format("html:<script> alert ('%s(은)는 이미 사용중인 이메일 입니다.');history.back(); </script>",email);
+			return String.format("html:<script> alert ('%s(은)는 이미 사용중인 이메일 입니다.');history.back(); </script>", email);
 		}
-		
+
 		memberService.join(loginId, loginPw, name, nickname, email);
-		
-		
+
 		return String.format("html:<script> alert('%s님 환영합니다.'); location.replace('../home/main'); </script>", name);
 	}
 
 	private String doActionJoin() {
 		return "member/join.jsp";
 	}
-	
-	
-	
 
 }
