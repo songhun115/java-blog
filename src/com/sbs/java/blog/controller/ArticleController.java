@@ -22,6 +22,8 @@ public class ArticleController extends Controller {
 		// 이 메서드는 게시물 컨트롤러의 모든 액션이 실행되기 전에 실행된다.
 		// 필요없다면 지워도 된다.
 	}
+	
+	
 
 	public String doAction() {
 		switch (actionMethodName) {
@@ -42,7 +44,8 @@ public class ArticleController extends Controller {
 		}
 		return "";
 	}
-
+	
+	
 	private String doActionDelete() {
 		int id = Util.getInt(req, "id");
 		System.out.println(id);
@@ -73,9 +76,11 @@ public class ArticleController extends Controller {
 	private String doActionDoWrite() {
 		String title = req.getParameter("title");
 		String body = req.getParameter("body");
+		int logindMemberId = (int) req.getAttribute("logindMemberId");
 		int cateItemId = Util.getInt(req, "cateItemId");
+		
 
-		int id = articleService.write(cateItemId, title, body);
+		int id = articleService.write(cateItemId, title, body, logindMemberId);
 
 		return "html:<script> alert('" + id + "번 게시물이 생성되었습니다.'); location.replace('list'); </script>";
 	}
@@ -146,5 +151,12 @@ public class ArticleController extends Controller {
 		req.setAttribute("articles", articles);
 
 		return "article/list.jsp";
+	}
+
+
+
+	@Override
+	public String getControllerName() {
+		return "article";
 	}
 }

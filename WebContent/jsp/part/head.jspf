@@ -8,6 +8,7 @@
 int logindMemberId = (int) request.getAttribute("logindMemberId");
 Member logindMember = (Member) request.getAttribute("logindMember");
 boolean isLogind = (boolean) request.getAttribute("isLogind");
+
 %>
 
 <!DOCTYPE html>
@@ -36,7 +37,7 @@ boolean isLogind = (boolean) request.getAttribute("isLogind");
 
 <script src="${pageContext.request.contextPath}/resource/js/common.js"></script>
 
-<title>정성훈 블로그</title>
+<title>정성훈 블로그 ${urlEncodedCurrentUrl}</title>
 </head>
 
 <body>
@@ -57,7 +58,7 @@ boolean isLogind = (boolean) request.getAttribute("isLogind");
 			<li><a class="navber__menu__item right"
 				href="${pageContext.request.contextPath}/s/member/join">Join</a></li>
 			<li><a class="navber__menu__item right"
-				href="${pageContext.request.contextPath}/s/member/login">login</a></li>
+				href="${pageContext.request.contextPath}/s/member/login?afterLoginRedirectUrl=${urlEncodedAfterLoginRedirectUrl}">login</a></li>
 			<%
 				}
 			%>

@@ -11,6 +11,7 @@ import com.sbs.java.blog.dto.CateItem;
 import com.sbs.java.blog.dto.Member;
 import com.sbs.java.blog.service.ArticleService;
 import com.sbs.java.blog.service.MemberService;
+import com.sbs.java.blog.util.Util;
 
 public abstract class Controller {
 	protected Connection dbConn;
@@ -32,14 +33,16 @@ public abstract class Controller {
 		memberService = new MemberService(dbConn);
 	}
 
+	public abstract String getControllerName();
+
 	public void beforeAction() {
 		// 액션 전 실행
 		// 이 메서드는 모든 컨트롤러의 모든 액션이 실행되기 전에 실행된다.
 		List<CateItem> cateItems = articleService.getForPrintCateItems();
-		
+
 		req.setAttribute("cateItems", cateItems);
-		
-		// 사용자 관련 정보를 리퀘스트 객체에 정리해서 넣기 
+
+		// 사용자 관련 정보를 리퀘스트 객체에 정리해서 넣기
 		int logindMemberId = -1;
 		boolean isLogind = false;
 		Member logindMember = null;
@@ -54,7 +57,30 @@ public abstract class Controller {
 		req.setAttribute("isLogind", isLogind);
 		req.setAttribute("logindMemberId", logindMemberId);
 
-		
+		// 현재 URL
+
+		String currentUrl = req.getRequestURI();
+
+		if (req.getQueryString() != null) {
+			currentUrl += "?" + req.getQueryString();
+		}
+
+		String urlEncodedCurrentUrl = Util.getUrlEncoded(currentUrl);
+
+		// 현재 접속된 페이지와 관련된 유용한 정보 담기
+		req.setAttribute("currentUrl", currentUrl);
+		req.setAttribute("urlEncodedCurrentUrl", urlEncodedCurrentUrl);
+		req.setAttribute("urlEncodedAfterLoginRedirectUrl", urlEncodedCurrentUrl);
+
+		// 로그인 페이지에서 로그인 페이지로 이동하는 버튼을 또 누른 경우
+		// 기존 afterLoginRedirectUrl 정보를 유지시키기 위한 로직
+		if (currentUrl.contains("/s/member/login")) {
+			System.out.println("currentUrl : " + currentUrl);
+			String urlEncodedOldAfterLoginRedirectUrl = Util.getString(req, "afterLoginRedirectUrl", "");
+			urlEncodedOldAfterLoginRedirectUrl = Util.getUrlEncoded(urlEncodedOldAfterLoginRedirectUrl);
+			req.setAttribute("urlEncodedAfterLoginRedirectUrl", urlEncodedOldAfterLoginRedirectUrl);
+		}
+
 	}
 
 	public void afterAction() {
@@ -65,9 +91,78 @@ public abstract class Controller {
 
 	public String executeAction() {
 		beforeAction();
+
+		String doGuardRs = doGuard();
+
+		if (doGuardRs != null) {
+			return doGuardRs;
+		}
+
 		String rs = doAction();
 		afterAction();
 
 		return rs;
+	}
+
+	private String doGuard() {
+		// 로그인에 관련된 가드 시작
+		boolean isLogind = (boolean) req.getAttribute("isLogind");
+
+		boolean needToLogin = false;
+
+		String controllerName = getControllerName();
+
+		switch (controllerName) {
+		case "member":
+			switch (actionMethodName) {
+			case "doLogout":
+				needToLogin = true;
+				break;
+			}
+			break;
+		case "article":
+			switch (actionMethodName) {
+			case "write":
+			case "doWrite":
+			case "doModify":
+			case "modify":
+			case "dodelete":
+			case "delete":
+				needToLogin = true;
+				break;
+			}
+			break;
+		}
+		
+		String urlEncodedAfterLoginRedirectUrl = (String)req.getAttribute("urlEncodedAfterLoginRedirectUrl");
+		
+		if (needToLogin && isLogind == false) {
+			return "html:<script> alert('로그인 후 이용해주세요.'); location.href = '../member/login?afterLoginRedirectUrl=" + urlEncodedAfterLoginRedirectUrl + "'; </script>";
+		}
+		// 로그인에 관련된 가드 끝
+
+		// 로그아웃에 관련된 가드 시작
+		boolean needToLogout = false;
+
+		switch (controllerName) {
+		case "member":
+			switch (actionMethodName) {
+			case "login":
+			case "join":
+				needToLogout = true;
+				break;
+			}
+			break;
+		}
+
+		if (needToLogout && isLogind) {
+			return "html:<script> alert('로그아웃 후 이용해주세요.'); history.back(); </script>";
+		}
+		// 로그아웃에 관련된 가드 끝
+
+		return null;
+
+		// 로그아웃에 관련된 가드 끝
+
 	}
 }

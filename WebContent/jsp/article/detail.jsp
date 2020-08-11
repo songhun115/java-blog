@@ -74,7 +74,7 @@ String cateItemName = (String) request.getAttribute("cateItemName");
 			</div>
 			<div class="detail__list">
 				<ul class="detail__ul">
-					<li class="detail__item">개발성훈</li>
+					<li class="detail__item">${article.extra.writer}</li>
 					<li class="detail__item"><a href="<%=article.getId()%>"><%=cateItemName%></a></li>
 					<li class="detail__item">조회수 : <%=article.getHit()%></li>
 					<li class="detail__item"><%=article.getRegDate()%></li>

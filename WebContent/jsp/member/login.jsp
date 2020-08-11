@@ -13,7 +13,7 @@
 	href="${pageContext.request.contextPath}/resource/css/home/main.css" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resource/css/member/member.css" />
-FT
+
 <script
 	src="${pageContext.request.contextPath}/resource/js/home/main.js"></script>
 <script src="${pageContext.request.contextPath}/resource/js/common.js"></script>
@@ -69,6 +69,7 @@ FT
 		<form action="doLogin" method="POST" class="login__form form1"
 			onsubmit="submitLoginForm(this); return false;">
 			<input type="hidden" name="loginPwReal" />
+			<input type="hidden" name="redirectUrl" value="${param.afterLoginRedirectUrl}" />
 			<div class="form__box">
 				<div class="labal">아이디</div>
 				<div class="input">

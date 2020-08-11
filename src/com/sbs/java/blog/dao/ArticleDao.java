@@ -66,11 +66,13 @@ public class ArticleDao extends Dao {
 	public Article getForPrintArticle(int id) {
 		SecSql sql = new SecSql();
 
-		sql.append("SELECT *, '정성훈' AS extra__writer ");
-		sql.append("FROM article ");
+		sql.append("SELECT A.*, M.nickname AS extra__writer ");
+		sql.append("FROM article AS A");
+		sql.append("INNER JOIN member AS M");
+		sql.append("ON A.memberId = M.id");
 		sql.append("WHERE 1 ");
-		sql.append("AND id = ? ", id);
-		sql.append("AND displayStatus = 1 ");
+		sql.append("AND A.id = ? ", id);
+		sql.append("AND A.displayStatus = 1 ");
 
 		return new Article(DBUtil.selectRow(dbConn, sql));
 	}
@@ -104,7 +106,7 @@ public class ArticleDao extends Dao {
 		return new CateItem(DBUtil.selectRow(dbConn, sql));
 	}
 
-	public int write(int cateItemId, String title, String body) {
+	public int write(int cateItemId, String title, String body, int logindMemberId) {
 		SecSql sql = new SecSql();
 
 		sql.append("INSERT INTO article");
@@ -113,6 +115,7 @@ public class ArticleDao extends Dao {
 		sql.append(", title = ? ", title);
 		sql.append(", body = ? ", body);
 		sql.append(", displayStatus = '1'");
+		sql.append(", MemberId = ?", logindMemberId);
 		sql.append(", cateItemId = ?", cateItemId);
 
 		return DBUtil.insert(dbConn, sql);
@@ -126,19 +129,20 @@ public class ArticleDao extends Dao {
 
 		return DBUtil.update(dbConn, sql);
 	}
+
 // 게시물 삭제 함수
 	public int delete(int id) {
 		SecSql sql = new SecSql();
 
 		sql.append("DELETE FROM article");
 		sql.append("WHERE id = ?", id);
-		
+
 		return DBUtil.delete(dbConn, sql);
 	}
 
-	//게시물 수정 함수
+	// 게시물 수정 함수
 	public int modify(int cateItemId, String title, String body) {
-		
+
 		SecSql sql = new SecSql();
 		sql.append("update article");
 		sql.append("SET regDate = NOW()");

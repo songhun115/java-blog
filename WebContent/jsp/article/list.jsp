@@ -14,6 +14,8 @@ String cateItemName = (String) request.getAttribute("cateItemName");
 <!-- 하이라이트 라이브러리 추가, 토스트 UI 에디터에서 사용됨 -->
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resource/css/home/main.css" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resource/css/article/article.css" />
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
 <link rel="stylesheet"

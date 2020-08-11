@@ -102,4 +102,9 @@ public class testController extends Controller {
 		return "html:" + title;
 	}
 
+	@Override
+	public String getControllerName() {
+		return "test";
+	}
+
 }

@@ -11,7 +11,7 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resource/css/home/main.css" />
 	<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resource/css/member/member.css" />FT
+	href="${pageContext.request.contextPath}/resource/css/member/member.css" />
 <script
 	src="${pageContext.request.contextPath}/resource/js/home/main.js"></script>
 <script src="${pageContext.request.contextPath}/resource/js/common.js"></script>
@@ -99,9 +99,11 @@
 		</div>
 		<form action="doJoin" method="POST" class="join__form form1"
 			onsubmit="submitJoinForm(this); return false;">
+			
 			<input type="hidden" name="loginPwReal" />
 			<div class="form__box">
 				<div class="labal">아이디</div>
+				
 				<div class="input">
 					<input name="loginId" type="text" placeholder="아이디를 입력해주세요." />
 				</div>
