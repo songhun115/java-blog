@@ -3,6 +3,7 @@ package com.sbs.java.blog.controller;
 
 import java.sql.Connection;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -48,14 +49,37 @@ public class ArticleController extends Controller {
 	
 	private String doActionDelete() {
 		int id = Util.getInt(req, "id");
-		System.out.println(id);
-		articleService.delete(id);
+		
+		int loginedMemberId = (int)req.getAttribute("logindMemberId");
+		
+		Map<String, Object> getCheckRsDeleteAvailableRs = articleService.getCheckRsDeleteAvailable(id, loginedMemberId);
+		
+		if(Util.isSuccess(getCheckRsDeleteAvailableRs) == false ) {
+			return "html:<script> alert('" + getCheckRsDeleteAvailableRs.get("msg") + "'); history.back(); </script>";	
+		}
+		
+		articleService.articleDelete(id);
 
 		return "html:<script> alert('" + id + "번 게시물이 삭제되었습니다.'); location.replace('list'); </script>";
 	}
 
 
 	private String doActionModify() {
+		if (Util.empty(req, "id")) {
+			return "html:id를 입력해주세요.";
+		}
+
+		if (Util.isNum(req, "id") == false) {
+			return "html:id를 정수로 입력해주세요.";
+		}
+
+		int id = Util.getInt(req, "id");
+		System.out.println(id);
+
+		Article article = articleService.getForPrintArticle(id);
+
+		req.setAttribute("article", article);
+		
 		return "article/modify.jsp";
 	}
 
@@ -63,8 +87,10 @@ public class ArticleController extends Controller {
 		String title = req.getParameter("title");
 		String body = req.getParameter("body");
 		int cateItemId = Util.getInt(req, "cateItemId");
+		int id = Util.getInt(req, "id");
+		
 
-		int id = articleService.modify(cateItemId, title, body);
+		articleService.modify(cateItemId, title, body, id);
 
 		return "html:<script> alert('" + id + "번 게시물이 수정되었습니다.'); location.replace('list'); </script>";
 	}
@@ -138,6 +164,8 @@ public class ArticleController extends Controller {
 		}
 
 		int itemsInAPage = 10;
+		
+		
 		int totalCount = articleService.getForPrintListArticlesCount(cateItemId, searchKeywordType, searchKeyword);
 
 		int totalPage = (int) Math.ceil(totalCount / (double) itemsInAPage);
@@ -145,8 +173,10 @@ public class ArticleController extends Controller {
 		req.setAttribute("totalCount", totalCount);
 		req.setAttribute("totalPage", totalPage);
 		req.setAttribute("page", page);
-
-		List<Article> articles = articleService.getForPrintListArticles(page, itemsInAPage, cateItemId,
+		
+		int loginedMemberId = (int)req.getAttribute("logindMemberId");
+		
+		List<Article> articles = articleService.getForPrintListArticles(loginedMemberId, page, itemsInAPage, cateItemId,
 				searchKeywordType, searchKeyword);
 		req.setAttribute("articles", articles);
 

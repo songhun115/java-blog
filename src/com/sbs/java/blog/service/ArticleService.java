@@ -1,30 +1,50 @@
 package com.sbs.java.blog.service;
 
 import java.sql.Connection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.sbs.java.blog.dao.ArticleDao;
 import com.sbs.java.blog.dto.Article;
 import com.sbs.java.blog.dto.CateItem;
+import com.sbs.java.blog.util.Util;
 
 public class ArticleService extends Service {
 
 	private ArticleDao articleDao;
 
 	public ArticleService(Connection dbConn) {
-		
+
 		articleDao = new ArticleDao(dbConn);
 	}
 
-	public List<Article> getForPrintListArticles(int page, int itemsInAPage, int cateItemId, String searchKeywordType, String searchKeyword) {
-		return articleDao.getForPrintListArticles(page, itemsInAPage, cateItemId, searchKeywordType, searchKeyword);
+	public List<Article> getForPrintListArticles(int actorId, int page, int itemsInAPage, int cateItemId, String searchKeywordType,
+			String searchKeyword) {
+		
+		List<Article> articles = articleDao.getForPrintListArticles(page, itemsInAPage, cateItemId, searchKeywordType, searchKeyword);
+		
+		for(Article article : articles) {
+			updateArticleExtraDateForPrint(article, actorId);
+		}
+		
+		return articles;
 	}
+
+	private void updateArticleExtraDateForPrint(Article article, int actorId) {
+		boolean deleteAvailable = Util.isSuccess(getCheckRsDeleteAvailable(article, actorId));
+		article.getExtra().put("deleteAvailable", deleteAvailable);
+		
+		boolean modifyAvailable = Util.isSuccess(getCheckRsModifyAvailable(article, actorId));
+		article.getExtra().put("modifyAvailable", modifyAvailable);
+		
+	}
+
+	
 
 	public int getForPrintListArticlesCount(int cateItemId, String searchKeywordType, String searchKeyword) {
 		return articleDao.getForPrintListArticlesCount(cateItemId, searchKeywordType, searchKeyword);
 	}
-	
-	
 
 	public Article getForPrintArticle(int id) {
 		return articleDao.getForPrintArticle(id);
@@ -46,15 +66,50 @@ public class ArticleService extends Service {
 		articleDao.increaseHit(id);
 	}
 
-	public int delete(int id) {
-		return articleDao.delete(id);
+	public int articleDelete(int id) {
+		return articleDao.articleDelete(id);
 	}
 
-	public int modify(int cateItemId, String title, String body) {
-		return articleDao.modify(cateItemId, title, body);
+	public int modify(int cateItemId, String title, String body, int id) {
+		return articleDao.modify(cateItemId, title, body, id);
+
+	}
+	
+	private Map<String, Object> getCheckRsModifyAvailable(Article article, int actorId) { 
+		 return getCheckRsDeleteAvailable(article, actorId);
+	}
+	
+	private Map<String, Object> getCheckRsDeleteAvailable(Article article, int actorId) {
+
+
+		Map<String, Object> rs = new HashMap<>();
+
+		if (article == null) {
+			rs.put("resultCode", "F-1");
+			rs.put("msg", "존재하지 않는 게시물입니다.");
+
+			return rs;
+		}
+
+		if (article.getMemberId() != actorId) {
+			rs.put("resultCode", "F-2");
+			rs.put("msg", "작성자 본인이 아닙니다.");
+
+			return rs;
+		}
+
+		rs.put("resultCode", "S-1");
+		rs.put("msg", "작업이 가능합니다.");
+
+		return rs;
+	}
+	
+	
+	public Map<String, Object> getCheckRsDeleteAvailable(int id, int actorId) {
 		
+		Article article = articleDao.getForPrintArticle(id);
+		
+		return getCheckRsDeleteAvailable(article, actorId);
 	}
-
-
 
 }

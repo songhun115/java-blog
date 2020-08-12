@@ -5,6 +5,7 @@ import java.util.Map;
 public class Article extends Dto {
 	private String updateDate;
 	private int cateItemId;
+	private int memberId;
 	private String title;
 	private String body;
 	private int hit;
@@ -17,20 +18,29 @@ public class Article extends Dto {
 		this.title = (String) row.get("title");
 		this.body = (String) row.get("body");
 		this.hit = (int) row.get("hit");
+		this.memberId = (int) row.get("memberId");
 	}
 
 	@Override
 	public String toString() {
 		return "Article [updateDate=" + updateDate + ", cateItemId=" + cateItemId + ", hit=" + hit + ", title=" + title
-				+ ", body=" + body + ", dto=" + super.toString() + "]";
+				+ ", body=" + body + ", memberId=" + memberId + ", dto=" + super.toString() + "]";
 	}
 
-	public int getHit() {
-		return hit;
+	public void setMemberId(int hit) {
+		this.memberId = memberId;
+	}
+
+	public int getMemberId() {
+		return memberId;
 	}
 
 	public void setHit(int hit) {
 		this.hit = hit;
+	}
+
+	public int getHit() {
+		return memberId;
 	}
 
 	public String getUpdateDate() {

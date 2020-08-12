@@ -86,17 +86,6 @@ String cateItemName = (String) request.getAttribute("cateItemName");
 	width: 100%;
 }
 
-.article__item button {
-	opacity: 0;
-	transition: 0.3s;
-	padding: 3px;
-}
-
-.article__item:hover button {
-	opacity: 1;
-	transition: 0.3s;
-}
-
 @media ( max-width : 800px) {
 	.head__name>h1 {
 		font-size: 60px;
@@ -278,16 +267,30 @@ String cateItemName = (String) request.getAttribute("cateItemName");
 				</span> <span> <a href="./detail?id=<%=article.getId()%>"><%=article.getTitle()%></a>
 				</span> <span>
 						<ul class="right__box">
+							<%
+								if ((boolean) article.getExtra().get("deleteAvailable")) {
+							%>
 							<li>
 								<button>
-									<a href="./delete?id=<%=article.getId()%>">삭제</a>
+									<a onclick="if( confirm('삭제하시겠습니까?') == false ) return false;"
+										href="./delete?id=<%=article.getId()%>">삭제</a>
 								</button>
 							</li>
+							<%
+								}
+							%>
+							<%
+								if ((boolean) article.getExtra().get("modifyAvailable")) {
+							%>
 							<li>
 								<button>
 									<a href="./modify?id=<%=article.getId()%>">수정</a>
 								</button>
 							</li>
+							<%
+								}
+							%>
+
 						</ul> </sapn></li>
 				<%
 					}

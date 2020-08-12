@@ -68,11 +68,73 @@
 }
 </style>
 
+<script>
+	var onBeforeUnloadSetted = false;
+	var onBeforeUnload = function(e) {
+		return '떠나시겠습니까?'; // 요새 브라우저는 이 메시지가 아닌 자체의 메세지가 나옵니다.
+	};
+
+	function applyOnBeforeUnload() {
+		if (onBeforeUnloadSetted)
+			return;
+		$(window).bind('beforeunload', onBeforeUnload); // 떠날 때 실행되는 함수를 등록
+		onBeforeUnloadSetted = true;
+	}
+
+	function removeOnBeforeUnload() {
+		$(window).unbind('beforeunload', onBeforeUnload); // 떠날 때 실행되는 함수를 해제
+		onBeforeUnloadSetted = false;
+	}
+
+	var WriteForm__submitDone = false;
+
+	function submitModifyForm(form) {
+
+		if (WriteForm__submitDone) {
+			alert('처리중입니다.');
+			return;
+		}
+
+		form.title.value = form.title.value.trim();
+
+		if (form.title.value.length == 0) {
+			alert('제목을 입력해주세요');
+			form.title.focus();
+			return;
+		}
+
+		form.body.value = form.body.value.trim();
+
+		if (form.body.value.length == 0) {
+			alert('내용을 입력해주세요');
+			form.body.focus();
+			return;
+		}
+
+		removeOnBeforeUnload();
+		form.submit();
+		WriteForm__submitDone = true;
+	}
+
+	function WriteForm__init() {
+		// 폼의 특정 요소를 건드리(?)면, 그 이후 부터 외부로 이동하는 것에 참견하는 녀석을 작동시킨다.
+		$('form.write-form input, form.write-form textarea').keyup(function() {
+			applyOnBeforeUnload();
+		});
+
+	}
+
+	WriteForm__init();
+</script>
+
 <h1>게시글수정</h1>
 <div class="form__container">
-	<form action="doModify" class="write__form form1">
-	
-	
+	<form action="doModify" class="modify__form form1"
+		onsubmit="submitModifyForm(this); return false;">
+
+		<input type="hidden" name="id" value="<%=article.getId()%>">
+
+
 		<div class="form__box">
 			<div class="labal">카테고리선택</div>
 			<div class="input">
@@ -95,12 +157,11 @@
 		<div class="form__box">
 			<div class="labal">제목</div>
 			<div class="input">
-				<input name="title" type="text" placeholder="제목을 입력해주세요."
-					value="" />
+				<input name="title" type="text" placeholder="제목을 입력해주세요." value="" />
 			</div>
 		</div>
-		
-	
+
+
 		<div class="form__box">
 			<div class="labal">내용</div>
 			<div class="input">

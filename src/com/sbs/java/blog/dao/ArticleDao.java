@@ -131,7 +131,7 @@ public class ArticleDao extends Dao {
 	}
 
 // 게시물 삭제 함수
-	public int delete(int id) {
+	public int articleDelete(int id) {
 		SecSql sql = new SecSql();
 
 		sql.append("DELETE FROM article");
@@ -141,7 +141,7 @@ public class ArticleDao extends Dao {
 	}
 
 	// 게시물 수정 함수
-	public int modify(int cateItemId, String title, String body) {
+	public int modify(int cateItemId, String title, String body, int id) {
 
 		SecSql sql = new SecSql();
 		sql.append("update article");
@@ -149,6 +149,7 @@ public class ArticleDao extends Dao {
 		sql.append(", updateDate = NOW()");
 		sql.append(", title = ? ", title);
 		sql.append(", body = ? ", body);
+		sql.append(", id = ? ", id);
 		sql.append(", displayStatus = '1'");
 		sql.append(", cateItemId = ?", cateItemId);
 
