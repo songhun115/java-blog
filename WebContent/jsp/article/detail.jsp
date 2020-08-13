@@ -47,7 +47,11 @@
 <link rel="stylesheet"
 	href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" />
 
-
+<style>
+.reply__container {
+	height: 300px;
+}
+</style>
 <div class="article__container">
 
 	<div class="bg__item">
@@ -106,8 +110,55 @@
 				</div>
 			</div>
 		</div>
-	</div>
 
+		<div class="reply__container">
+			<div class="con reply__box">
+				<ul class="reply__list">
+					<c:forEach items="${articles}" var="article">
+						<li class="article__item"><span> <a
+								href="./detail?id=${article.id}"> ㅋㅋ </a>
+						</span> <span> <a href="./detail?id=${article.id}">${article.regDate}</a>
+						</span> <span> <a href="./detail?id=${article.id}">${article.title}</a>
+						</span> <span>
+								<ul class="right__box">
+									<c:if test="${article.extra.deleteAvailable}">
+										<li><a
+											onclick="if( confirm('삭제하시겠습니까?') == false ) return false;"
+											href="./delete?id=${article.id}">삭제</a></li>
+									</c:if>
+									<c:if test="${article.extra.deleteAvailable}">
+										<li><a href="./modify?id=${article.id}">수정</a></li>
+									</c:if>
+
+								</ul>
+						</span></li>
+
+					</c:forEach>
+				</ul>
+			</div>
+		</div>
+
+
+
+
+		<div class="form__container">
+		
+			<form action=doWriteReply method="POST" class="write__form form1">
+				<input name="articleId" type="hidden" value="${article.id}" />
+				<div class="form__box form__body">
+					<div class="input">
+						<textarea name="replyBody" placeholder="댓글을 입력해주세요."></textarea>
+					</div>
+				</div>
+
+				<div class="form__box form__send">
+					<div class="input">
+						<input type="submit" value="전송" /> <a href="detail">취소</a>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
 </div>
 
 

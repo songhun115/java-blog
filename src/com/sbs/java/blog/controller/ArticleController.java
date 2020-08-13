@@ -40,11 +40,15 @@ public class ArticleController extends Controller {
 			return doActionModify();
 		case "doModify":
 			return doActionDoModify();
+		case "doWriteReply":
+			return doActionWriteReply();
+		
 		}
 		return "";
 	}
 	
-	
+
+	//게시물 삭제 
 	private String doActionDelete() {
 		int id = Util.getInt(req, "id");
 		
@@ -62,7 +66,7 @@ public class ArticleController extends Controller {
 	}
 
 	
-	
+	//게시물 수정 	
 	private String doActionModify() {
 		if (Util.empty(req, "id")) {
 			return "html:id를 입력해주세요.";
@@ -81,7 +85,7 @@ public class ArticleController extends Controller {
 		
 		return "article/modify.jsp";
 	}
-
+	//게시물 수정
 	private String doActionDoModify() {
 		String title = req.getParameter("title");
 		String body = req.getParameter("body");
@@ -93,11 +97,13 @@ public class ArticleController extends Controller {
 
 		return "html:<script> alert('" + id + "번 게시물이 수정되었습니다.'); location.replace('list'); </script>";
 	}
-
+	
+	//게시물 작성
 	private String doActionWrite() {
 		return "article/write.jsp";
 	}
-
+	
+	//게시물 작성 
 	private String doActionDoWrite() {
 		String title = req.getParameter("title");
 		String body = req.getParameter("body");
@@ -106,10 +112,22 @@ public class ArticleController extends Controller {
 		
 
 		int id = articleService.write(cateItemId, title, body, logindMemberId);
-
+		
 		return "html:<script> alert('" + id + "번 게시물이 생성되었습니다.'); location.replace('list'); </script>";
 	}
+	
 
+	//댓글 작성
+	private String doActionWriteReply() {
+		String replyBody = req.getParameter("replyBody");
+		int logindMemberId = (int) req.getAttribute("logindMemberId");
+		int articleId = Util.getInt(req, "articleId");
+		
+		int id = articleService.doActionDoArticleReply(replyBody, logindMemberId, articleId);
+		return "html:<script> location.href = document.referrer; </script>";
+	}
+	
+	//게시물 상세
 	private String doActionDetail() {
 		if (Util.empty(req, "id")) {
 			return "html:id를 입력해주세요.";
@@ -118,19 +136,39 @@ public class ArticleController extends Controller {
 		if (Util.isNum(req, "id") == false) {
 			return "html:id를 정수로 입력해주세요.";
 		}
-
+		
 		int id = Util.getInt(req, "id");
 
 		articleService.increaseHit(id);
 		Article article = articleService.getForPrintArticle(id);
 
 		req.setAttribute("article", article);
+		
+		int cateItemId = 0;
 
+		if (!Util.empty(req, "cateItemId") && Util.isNum(req, "cateItemId")) {
+			cateItemId = Util.getInt(req, "cateItemId");
+		}
+		
+		String cateItemName = "전체";
+		
+		if (cateItemId != 0) {
+			CateItem cateItem = articleService.getCateItem(cateItemId);
+			cateItemName = cateItem.getName();
+		}
+		
+		req.setAttribute("cateItemName", cateItemName);
+		
+		int loginedMemberId = (int)req.getAttribute("logindMemberId");
+		
+		
+		
+		
+		
 		return "article/detail.jsp";
 	}
 	
-	
-	
+	//게시물 리스트 
 	private String doActionList() {
 		int page = 1;
 

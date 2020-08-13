@@ -61,6 +61,11 @@ public class ArticleService extends Service {
 	public int write(int cateItemId, String title, String body, int logindMemberId) {
 		return articleDao.write(cateItemId, title, body, logindMemberId);
 	}
+	
+	// 댓글 작성
+		public int doActionDoArticleReply(String replyBody, int logindMemberId, int articleId) {
+			return articleDao.doActionDoArticleReply(replyBody, logindMemberId, articleId);
+		}
 
 	public void increaseHit(int id) {
 		articleDao.increaseHit(id);
@@ -111,5 +116,6 @@ public class ArticleService extends Service {
 		
 		return getCheckRsDeleteAvailable(article, actorId);
 	}
+	
 
 }

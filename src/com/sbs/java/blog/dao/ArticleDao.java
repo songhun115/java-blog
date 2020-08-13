@@ -76,7 +76,7 @@ public class ArticleDao extends Dao {
 
 		return new Article(DBUtil.selectRow(dbConn, sql));
 	}
-
+	
 	public List<CateItem> getForPrintCateItems() {
 		SecSql sql = new SecSql();
 
@@ -121,6 +121,22 @@ public class ArticleDao extends Dao {
 		return DBUtil.insert(dbConn, sql);
 	}
 
+	//댓글 작성
+	public int doActionDoArticleReply(String replyBody, int logindMemberId, int articleId) {
+		SecSql sql = new SecSql();
+
+		sql.append("INSERT INTO articleReply");
+		sql.append("SET regDate = NOW()");
+		sql.append(", updateDate = NOW()");
+		sql.append(", body = ? ", replyBody);
+		sql.append(", displayStatus = '1'");
+		sql.append(", articleId = ? ", articleId);
+		sql.append(", MemberId = ?", logindMemberId);
+
+		return DBUtil.insert(dbConn, sql);
+	}
+
+	
 // 게시물 조회 함수 
 	public int increaseHit(int id) {
 		SecSql sql = SecSql.from("UPDATE article");
@@ -153,5 +169,7 @@ public class ArticleDao extends Dao {
 		sql.append(" WHERE id = ? ", id);
 		return DBUtil.update(dbConn, sql);
 	}
+
+	
 
 }
