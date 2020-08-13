@@ -5,12 +5,7 @@
 <%@ include file="/jsp/part/head.jspf"%>
 <script
 	src="${pageContext.request.contextPath}/resource/js/home/main.js"></script>
-<%
-	List<Article> articles = (List<Article>) request.getAttribute("articles");
-int totalPage = (int) request.getAttribute("totalPage");
-int paramPage = (int) request.getAttribute("page");
-String cateItemName = (String) request.getAttribute("cateItemName");
-%>
+
 <!-- 하이라이트 라이브러리 추가, 토스트 UI 에디터에서 사용됨 -->
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resource/css/home/main.css" />
@@ -238,19 +233,16 @@ String cateItemName = (String) request.getAttribute("cateItemName");
 
 
 
-
 		<ul class="category__list">
 			<div class="total">총 게시물 수 : ${totalCount}</div>
-			<%
-				for (CateItem cateItem : cateItems) {
-			%>
 			<li class="category__item"><a
-				href="${pageContext.request.contextPath}/s/article/list?cateItemId=<%=cateItem.getId()%>">
-					<%=cateItem.getName()%></a></li>
+				href="${pageContext.request.contextPath}/s/article/list">전체 </a></li>
+			<c:forEach items="${cateItems}" var="cateItem">
+				<li class="category__item"><a
+					href="${pageContext.request.contextPath}/s/article/list?cateItemId=${cateItem.id}">
+						${cateItem.name}</a></li>
 
-			<%
-				}
-			%>
+			</c:forEach>
 		</ul>
 
 
@@ -258,45 +250,35 @@ String cateItemName = (String) request.getAttribute("cateItemName");
 
 		<div class="con article__box">
 			<ul class="article__list">
-				<%
-					for (Article article : articles) {
-				%>
-				<li class="article__item"><span> <a
-						href="./detail?id=<%=article.getId()%>"><%=cateItemName%>
-					</a>
-				</span> <span> <a href="./detail?id=<%=article.getId()%>"><%=article.getRegDate()%></a>
-				</span> <span> <a href="./detail?id=<%=article.getId()%>"><%=article.getTitle()%></a>
-				</span> <span>
-						<ul class="right__box">
-							<%
-								if ((boolean) article.getExtra().get("deleteAvailable")) {
-							%>
-							<li>
-								<button>
-									<a onclick="if( confirm('삭제하시겠습니까?') == false ) return false;"
-										href="./delete?id=<%=article.getId()%>">삭제</a>
-								</button>
-							</li>
-							<%
-								}
-							%>
-							<%
-								if ((boolean) article.getExtra().get("modifyAvailable")) {
-							%>
-							<li>
-								<button>
-									<a onclick="if( confirm('수정하시겠습니까?') == false ) return false;"
-										href="./modify?id=<%=article.getId()%>">수정</a>
-								</button>
-							</li>
-							<%
-								}
-							%>
 
-						</ul> </sapn></li>
-				<%
-					}
-				%>
+
+				<c:forEach items="${articles}" var="article">
+				<li class="article__item"><span> <a
+							href="./detail?id=${article.id}"> <!-- article.getExtra().getWriterter %> -->ㅋㅋ
+						</a>
+					</span> <span> <a href="./detail?id=${article.id}">${article.regDate}</a>
+					</span> <span> <a href="./detail?id=${article.id}">${article.title}</a>
+					</span> <span>
+							<ul class="right__box">
+								<c:if test="${article.extra.deleteAvailable}">
+									<li>
+										<button>
+											<a
+												onclick="if( confirm('삭제하시겠습니까?') == false ) return false;"
+												href="./delete?id=${article.id}">삭제</a>
+										</button>
+									</li>
+								</c:if>
+								<c:if test="${article.extra.deleteAvailable}">
+									<li>
+										<button>
+											<a href="./modify?id=${article.id}">수정</a>
+										</button>
+									</li>
+								</c:if>
+
+							</ul> </sapn></li>
+				</c:forEach>
 
 
 			</ul>
@@ -305,15 +287,14 @@ String cateItemName = (String) request.getAttribute("cateItemName");
 
 		<div class="con page-box">
 			<ul class="flex flex-jc-c">
-				<%
-					for (int i = 1; i <= totalPage; i++) {
-				%>
-				<li class="<%=i == paramPage ? "current" : ""%>"><a
-					href="?cateItemId=${param.cateItemId}&searchKeywordType=${param.searchKeywordType}&searchKeyword=${param.searchKeyword}&page=<%=i%>"
-					class="block"><%=i%></a></li>
-				<%
-					}
-				%>
+				
+
+				
+				<c:forEach var="i" begin="1" end="${ totalPage}" step="1">
+				<<li class="${i == cPage ? 'current' : ''}"><a
+					href="?cateItemId=${param.cateItemId}&searchKeywordType=${param.searchKeywordType}&searchKeyword=${param.searchKeyword}&page=${i}"
+					class="block">${i}</a></li>
+				</c:forEach>
 			</ul>
 		</div>
 	</div>

@@ -2,10 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/jsp/part/head.jspf"%>
-<%
-	Article article = (Article) request.getAttribute("article");
-String cateItemName = (String) request.getAttribute("cateItemName");
-%>
+
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resource/css/article/article.css" />
 <link rel="stylesheet"
@@ -68,41 +65,30 @@ String cateItemName = (String) request.getAttribute("cateItemName");
 
 	<div class="detail__container">
 		<div class="detail__box">
-			<div class="detail__title">
-				<%=article.getTitle()%>
-			</div>
+			<div class="detail__title">${article.title}</div>
 			<div class="detail__list">
 				<ul class="detail__ul">
 					<li class="detail__item">${article.extra.writer}</li>
-					<%
-						for (CateItem cateItem : cateItems) {
-					%>
-					<li class="category__item"><a
-						href="${pageContext.request.contextPath}/s/article/list?cateItemId=<%=cateItem.getId()%>">
-							<%
-								if (cateItem.getId() == article.getCateItemId()) {
-							%> <%=cateItem.getName()%></a></li>
-					<%
-						}
-					%>
+					<c:forEach items="${cateItems}" var="cateItem">
 
-					<%
-						}
-					%>
-					<li class="detail__item">조회수 : <%=article.getHit()%></li>
-					<li class="detail__item"><%=article.getRegDate()%></li>
+						<li class="category__item"><a
+							href="${pageContext.request.contextPath}/s/article/list?cateItemId=${cateItem.id}">
+								<c:if test="${cateItem.id == article.cateItemId }">
+
+								</c:if>
+					</c:forEach>
+					<li class="detail__item">조회수 : ${article.hit}</li>
+					<li class="detail__item">${article.regDate}</li>
 					<li class="detail__item"><a
 						onclick="if( confirm('삭제하시겠습니까?') == false ) return false;"
-						href="./delete?id=<%=article.getId()%>">삭제</a></li>
-					<li class="detail__item"><a
-						onclick="if( confirm('수정하시겠습니까?') == false ) return false;"
-						href="./modify?id=<%=article.getId()%>">수정</a></li>
+						href="./delete?id=${article.id}">삭제</a></li>
+					<li class="detail__item"><a href="./modify?id=${article.id}">수정</a></li>
 
 				</ul>
 			</div>
 			<div class="detail__body">
 				<div con>
-					<script type="text/x-templete" id="origin1" style="display: none;"><%=article.getBodyForXTemplate()%></script>
+					<script type="text/x-templete" id="origin1" style="display: none;">${article.bodyForXTemplate}</script>
 					<div id="viewer1"></div>
 					<script>
 						var editor1__initialValue = getBodyFromXTemplate('#origin1');

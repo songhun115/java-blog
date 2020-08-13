@@ -2,9 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/jsp/part/head.jspf"%>
-<%
-	Article article = (Article) request.getAttribute("article");
-%>
+
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resource/css/article/write.css" />
 
@@ -132,7 +130,7 @@
 	<form action="doModify" class="modify__form form1"
 		onsubmit="submitModifyForm(this); return false;">
 
-		<input type="hidden" name="id" value="<%=article.getId()%>">
+		<input type="hidden" name="id" value="${article.id}">
 
 
 		<div class="form__box">
@@ -140,14 +138,10 @@
 			<div class="input">
 
 				<select name="cateItemId">
-					<%
-						for (CateItem cateItem : cateItems) {
-					%>
-					<option value="<%=cateItem.getId()%>"><%=cateItem.getName()%></option>
-
-					<%
-						}
-					%>
+					
+						<c:forEach items="${cateItems}" var="cateItem">
+						<option ${article.cateItemId == cateItem.id ? 'selected' : 'selected'} value="${cateItem.id}">${cateItem.name}</option>
+					</c:forEach>
 				</select>
 
 			</div>
@@ -157,7 +151,8 @@
 		<div class="form__box">
 			<div class="labal">제목</div>
 			<div class="input">
-				<input name="title" type="text" placeholder="제목을 입력해주세요." value="" />
+				<input value="${article.title}" name="title" type="text"
+					placeholder="제목을 입력해주세요." />
 			</div>
 		</div>
 
@@ -167,6 +162,7 @@
 			<div class="input">
 				<textarea name="body" placeholder="내용을 입력해주세요."
 					value="${article.body}" /></textarea>
+					
 			</div>
 		</div>
 

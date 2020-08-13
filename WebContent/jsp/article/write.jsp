@@ -50,39 +50,34 @@
 			return;
 		}
 
-		 removeOnBeforeUnload();
-		  form.submit();
-		  WriteForm__submitDone = true;
+		removeOnBeforeUnload();
+		form.submit();
+		WriteForm__submitDone = true;
 	}
 
 	function WriteForm__init() {
-		  // 폼의 특정 요소를 건드리(?)면, 그 이후 부터 외부로 이동하는 것에 참견하는 녀석을 작동시킨다.
-		  $('form.write-form input, form.write-form textarea').keyup(function() {
-		    applyOnBeforeUnload();
-		  });
-		  
-		}
+		// 폼의 특정 요소를 건드리(?)면, 그 이후 부터 외부로 이동하는 것에 참견하는 녀석을 작동시킨다.
+		$('form.write-form input, form.write-form textarea').keyup(function() {
+			applyOnBeforeUnload();
+		});
 
-		WriteForm__init();
+	}
+
+	WriteForm__init();
 </script>
 
 <div class="form__container">
 	<form action="doWrite" method="POST" class="write__form form1"
 		onsubmit="WriteFormSubmit(this); return false;">
 
-		<input name="memberId" type="hidden" value="<%=logindMemberId%>" />
+		<input name="memberId" type="hidden" value="${logindMemberId}" />
 		<div class="form__box form__cate">
 			<div class="input">
 
 				<select name="cateItemId">
-					<%
-						for (CateItem cateItem : cateItems) {
-					%>
-					<option value="<%=cateItem.getId()%>"><%=cateItem.getName()%></option>
-
-					<%
-						}
-					%>
+					<c:forEach items="${cateItems}" var="cateItem">
+						<option value="${cateItem.id}">${cateItem.name}</option>
+					</c:forEach>
 				</select>
 
 			</div>
