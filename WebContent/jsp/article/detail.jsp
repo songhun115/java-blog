@@ -12,8 +12,7 @@ String cateItemName = (String) request.getAttribute("cateItemName");
 	href="${pageContext.request.contextPath}/resource/css/home/main.css" />
 <script
 	src="${pageContext.request.contextPath}/resource/js/home/main.js"></script>
-<script
-	src="${pageContext.request.contextPath}/resource/js/common.js"></script>
+<script src="${pageContext.request.contextPath}/resource/js/common.js"></script>
 
 <!-- 하이라이트 라이브러리 추가, 토스트 UI 에디터에서 사용됨 -->
 <script
@@ -75,12 +74,28 @@ String cateItemName = (String) request.getAttribute("cateItemName");
 			<div class="detail__list">
 				<ul class="detail__ul">
 					<li class="detail__item">${article.extra.writer}</li>
-					<li class="detail__item"><a href="<%=article.getId()%>"><%=cateItemName%></a></li>
+					<%
+						for (CateItem cateItem : cateItems) {
+					%>
+					<li class="category__item"><a
+						href="${pageContext.request.contextPath}/s/article/list?cateItemId=<%=cateItem.getId()%>">
+							<%
+								if (cateItem.getId() == article.getCateItemId()) {
+							%> <%=cateItem.getName()%></a></li>
+					<%
+						}
+					%>
+
+					<%
+						}
+					%>
 					<li class="detail__item">조회수 : <%=article.getHit()%></li>
 					<li class="detail__item"><%=article.getRegDate()%></li>
 					<li class="detail__item"><a
+						onclick="if( confirm('삭제하시겠습니까?') == false ) return false;"
 						href="./delete?id=<%=article.getId()%>">삭제</a></li>
 					<li class="detail__item"><a
+						onclick="if( confirm('수정하시겠습니까?') == false ) return false;"
 						href="./modify?id=<%=article.getId()%>">수정</a></li>
 
 				</ul>

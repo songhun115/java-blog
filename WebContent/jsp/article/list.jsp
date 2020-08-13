@@ -262,7 +262,8 @@ String cateItemName = (String) request.getAttribute("cateItemName");
 					for (Article article : articles) {
 				%>
 				<li class="article__item"><span> <a
-						href="./detail?id=<%=article.getId()%>"><%=cateItemName%></a>
+						href="./detail?id=<%=article.getId()%>"><%=cateItemName%>
+					</a>
 				</span> <span> <a href="./detail?id=<%=article.getId()%>"><%=article.getRegDate()%></a>
 				</span> <span> <a href="./detail?id=<%=article.getId()%>"><%=article.getTitle()%></a>
 				</span> <span>
@@ -284,7 +285,8 @@ String cateItemName = (String) request.getAttribute("cateItemName");
 							%>
 							<li>
 								<button>
-									<a href="./modify?id=<%=article.getId()%>">수정</a>
+									<a onclick="if( confirm('수정하시겠습니까?') == false ) return false;"
+										href="./modify?id=<%=article.getId()%>">수정</a>
 								</button>
 							</li>
 							<%

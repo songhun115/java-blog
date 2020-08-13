@@ -6,9 +6,6 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resource/css/article/article.css" />
 
-
-
-
 <script>
 	var onBeforeUnloadSetted = false;
 	var onBeforeUnload = function(e) {
@@ -73,7 +70,7 @@
 	<form action="doWrite" method="POST" class="write__form form1"
 		onsubmit="WriteFormSubmit(this); return false;">
 
-		<input name="memberId" type="heidden" value="<%=logindMemberId%>" />
+		<input name="memberId" type="hidden" value="<%=logindMemberId%>" />
 		<div class="form__box form__cate">
 			<div class="input">
 

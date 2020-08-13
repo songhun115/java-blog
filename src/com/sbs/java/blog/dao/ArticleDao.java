@@ -144,15 +144,13 @@ public class ArticleDao extends Dao {
 	public int modify(int cateItemId, String title, String body, int id) {
 
 		SecSql sql = new SecSql();
-		sql.append("update article");
-		sql.append("SET regDate = NOW()");
-		sql.append(", updateDate = NOW()");
+		
+		sql.append("UPDATE article");
+		sql.append("SET updateDate = NOW()");
+		sql.append(", cateItemId = ?", cateItemId);
 		sql.append(", title = ? ", title);
 		sql.append(", body = ? ", body);
-		sql.append(", id = ? ", id);
-		sql.append(", displayStatus = '1'");
-		sql.append(", cateItemId = ?", cateItemId);
-
+		sql.append(" WHERE id = ? ", id);
 		return DBUtil.update(dbConn, sql);
 	}
 

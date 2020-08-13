@@ -23,8 +23,6 @@ public class ArticleController extends Controller {
 		// 이 메서드는 게시물 컨트롤러의 모든 액션이 실행되기 전에 실행된다.
 		// 필요없다면 지워도 된다.
 	}
-	
-	
 
 	public String doAction() {
 		switch (actionMethodName) {
@@ -63,7 +61,8 @@ public class ArticleController extends Controller {
 		return "html:<script> alert('" + id + "번 게시물이 삭제되었습니다.'); location.replace('list'); </script>";
 	}
 
-
+	
+	
 	private String doActionModify() {
 		if (Util.empty(req, "id")) {
 			return "html:id를 입력해주세요.";
@@ -74,7 +73,7 @@ public class ArticleController extends Controller {
 		}
 
 		int id = Util.getInt(req, "id");
-		System.out.println(id);
+		
 
 		Article article = articleService.getForPrintArticle(id);
 
@@ -129,7 +128,9 @@ public class ArticleController extends Controller {
 
 		return "article/detail.jsp";
 	}
-
+	
+	
+	
 	private String doActionList() {
 		int page = 1;
 
@@ -182,8 +183,8 @@ public class ArticleController extends Controller {
 
 		return "article/list.jsp";
 	}
-
-
+	
+	
 
 	@Override
 	public String getControllerName() {
