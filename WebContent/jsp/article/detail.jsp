@@ -78,7 +78,7 @@
 						<li class="category__item"><a
 							href="${pageContext.request.contextPath}/s/article/list?cateItemId=${cateItem.id}">
 								<c:if test="${cateItem.id == article.cateItemId }">
-
+								${cateItem.name}
 								</c:if>
 					</c:forEach>
 					<li class="detail__item">조회수 : ${article.hit}</li>
@@ -111,25 +111,20 @@
 			</div>
 		</div>
 
+
 		<div class="reply__container">
 			<div class="con reply__box">
 				<ul class="reply__list">
-					<c:forEach items="${articles}" var="article">
-						<li class="article__item"><span> <a
-								href="./detail?id=${article.id}"> ㅋㅋ </a>
-						</span> <span> <a href="./detail?id=${article.id}">${article.regDate}</a>
-						</span> <span> <a href="./detail?id=${article.id}">${article.title}</a>
+					<c:forEach items="${replys}" var="reply">
+						<li class="reply__item"><span> <a
+								href="./detail?id=${reply.id}">${reply.body}</a>
+						</span> <span> <a href="./detail?id=${reply.id}">${reply.regDate}</a>
 						</span> <span>
 								<ul class="right__box">
-									<c:if test="${article.extra.deleteAvailable}">
-										<li><a
-											onclick="if( confirm('삭제하시겠습니까?') == false ) return false;"
-											href="./delete?id=${article.id}">삭제</a></li>
-									</c:if>
-									<c:if test="${article.extra.deleteAvailable}">
-										<li><a href="./modify?id=${article.id}">수정</a></li>
-									</c:if>
-
+									<li><a
+										onclick="if( confirm('삭제하시겠습니까?') == false ) return false;"
+										href="./replyDelete?id=${reply.id}">삭제</a></li>
+									<li><a href="./replyModify?id=${reply.id}">수정</a></li>
 								</ul>
 						</span></li>
 
@@ -138,26 +133,25 @@
 			</div>
 		</div>
 
-
-
-
-		<div class="form__container">
 		
-			<form action=doWriteReply method="POST" class="write__form form1">
-				<input name="articleId" type="hidden" value="${article.id}" />
-				<div class="form__box form__body">
-					<div class="input">
-						<textarea name="replyBody" placeholder="댓글을 입력해주세요."></textarea>
-					</div>
-				</div>
+			<div class="form__container">
 
-				<div class="form__box form__send">
-					<div class="input">
-						<input type="submit" value="전송" /> <a href="detail">취소</a>
+				<form action=doWriteReply method="POST" class="write__form form1">
+					<input name="articleId" type="hidden" value="${article.id}" />
+					<div class="form__box form__body">
+						<div class="input">
+							<textarea name="replyBody" placeholder="댓글을 입력해주세요."></textarea>
+						</div>
 					</div>
-				</div>
-			</form>
-		</div>
+
+					<div class="form__box form__send">
+						<div class="input">
+							<input type="submit" value="전송" /> <a href="detail">취소</a>
+						</div>
+					</div>
+				</form>
+			</div>
+		
 	</div>
 </div>
 
