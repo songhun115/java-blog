@@ -53,10 +53,6 @@ public class ArticleController extends Controller {
 		return "";
 	}
 
-	
-
-
-
 	// 게시물 삭제
 	private String doActionDelete() {
 		int id = Util.getInt(req, "id");
@@ -110,8 +106,8 @@ public class ArticleController extends Controller {
 
 		return "article/modify.jsp";
 	}
-	
-	//댓글 수정
+
+	// 댓글 수정
 	private String doActionReplyModify() {
 		if (Util.empty(req, "id")) {
 			return "html:id를 입력해주세요.";
@@ -122,14 +118,21 @@ public class ArticleController extends Controller {
 		}
 
 		int id = Util.getInt(req, "id");
+		int loginedMemberId = (int) req.getAttribute("logindMemberId");
 
+		Map<String, Object> getCheckRsDeleteAvailableRs = articleService.getCheckRsDeleteAvailableReply(id,
+				loginedMemberId);
+
+		if (Util.isSuccess(getCheckRsDeleteAvailableRs) == false) {
+			return "html:<script> alert('" + getCheckRsDeleteAvailableRs.get("msg") + "'); history.back(); </script>";
+		}
 		Reply reply = articleService.getForPrintArticleReply(id);
 
 		req.setAttribute("reply", reply);
 
 		return "article/reply.jsp";
 	}
-	
+
 	private String doActionReplyDoModify() {
 		String body = req.getParameter("body");
 		int id = Util.getInt(req, "id");

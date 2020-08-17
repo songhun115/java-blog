@@ -30,7 +30,6 @@ public class MemberController extends Controller {
 		case "doLogout":
 			return doActionDoLogout();
 		}
-
 		return "";
 	}
 

@@ -1,4 +1,3 @@
-<%@ page import="com.sbs.java.blog.dto.Article"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/jsp/part/head.jspf"%>
@@ -47,9 +46,52 @@
 <link rel="stylesheet"
 	href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" />
 
+<script>
+var onBeforeUnloadSetted = false;
+
+
+
+var WriteForm__submitDone = false;
+
+function WriteFormSubmit(form) {
+
+	if (WriteForm__submitDone) {
+		alert('처리중입니다.');
+		return;
+	}
+
+
+	form.replyBody.value = form.replyBody.value.trim();
+
+	if (form.replyBody.value.length == 0) {
+		alert('내용을 입력해주세요');
+		form.replyBody.focus();
+		return;
+	}
+
+	removeOnBeforeUnload();
+	form.submit();
+	WriteForm__submitDone = true;
+}
+
+function WriteForm__init() {
+	// 폼의 특정 요소를 건드리(?)면, 그 이후 부터 외부로 이동하는 것에 참견하는 녀석을 작동시킨다.
+	$('form.write-form input, form.write-form textarea').keyup(function() {
+		applyOnBeforeUnload();
+	});
+
+}
+
+WriteForm__init();
+</script>
+
 <style>
 .reply__container {
 	height: 300px;
+}
+
+.article__replys__list__box>reply__box>reply__list>reply__item.high {
+	background-color:red;
 }
 </style>
 <div class="article__container">
@@ -112,7 +154,7 @@
 		</div>
 
 
-		<div class="reply__container">
+		<div class="reply__container article__replys__list__box ">
 			<div class="con reply__box">
 				<ul class="reply__list">
 					<c:forEach items="${replys}" var="reply">
@@ -133,25 +175,26 @@
 			</div>
 		</div>
 
-		
-			<div class="form__container">
 
-				<form action=doWriteReply method="POST" class="write__form form1">
-					<input name="articleId" type="hidden" value="${article.id}" />
-					<div class="form__box form__body">
-						<div class="input">
-							<textarea name="replyBody" placeholder="댓글을 입력해주세요."></textarea>
-						</div>
-					</div>
 
-					<div class="form__box form__send">
-						<div class="input">
-							<input type="submit" value="전송" /> <a href="detail">취소</a>
-						</div>
+		<div class="form__container">
+
+			<form action=doWriteReply method="POST" class="write__form form1" onsubmit="WriteFormSubmit(this); return false;">
+				<input name="articleId" type="hidden" value="${article.id}" />
+				<div class="form__box form__body">
+					<div class="input">
+						<textarea name="replyBody" placeholder="댓글을 입력해주세요."></textarea>
 					</div>
-				</form>
-			</div>
-		
+				</div>
+
+				<div class="form__box form__send">
+					<div class="input">
+						<input type="submit" value="전송" /> <a href="detail">취소</a>
+					</div>
+				</div>
+			</form>
+		</div>
+
 	</div>
 </div>
 
