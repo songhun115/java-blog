@@ -42,7 +42,7 @@
 	</div>
 
 	<div class="work__projects">
-		<a href="#" class="project" target="blank" data-type="front-end">
+		<a href="https://github.com/songhun115/Momentum-Project" class="project" target="blank" data-type="front-end">
 			<img
 			src="${pageContext.request.contextPath}/resource/imgs/front-end1.png"
 			alt="Front-end" class="project__img" />
@@ -92,14 +92,14 @@
 				<h3>back-end3</h3>
 				<span>Clone coding with and CSS</span>
 			</div>
-		</a> <a href="#" class="project" target="blank" data-type="mobile"> <img
+		</a> <a href="https://github.com/songhun115/Up-Down-game" class="project" target="blank" data-type="mobile"> <img
 			src="${pageContext.request.contextPath}/resource/imgs/mobile1.png"
 			alt="mobile" class="project__img" />
 			<div class="project__description">
 				<h3>mobile1</h3>
 				<span>Clone coding with and CSS</span>
 			</div>
-		</a> <a href="#" class="project" target="blank" data-type="mobile"> <img
+		</a> <a href="https://github.com/songhun115/Ipon-Calculator" class="project" target="blank" data-type="mobile"> <img
 			src="${pageContext.request.contextPath}/resource/imgs/mobile2.png"
 			alt="mobile" class="project__img" />
 			<div class="project__description">

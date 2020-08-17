@@ -52,8 +52,10 @@ public class MemberController extends Controller {
 
 	private String doActionDoLogout() {
 		session.removeAttribute("logindMemberId");
-
-		return String.format("html:<script> alert('로그아웃 되었습니다'); location.replace('../home/main'); </script>");
+		
+		String redirectUrl = Util.getString(req, "redirectUrl", "../home/main");
+		
+		return String.format("html:<script> alert('로그아웃 되었습니다'); location.replace('" + redirectUrl + "'); </script>");
 	}
 
 	private String doActionLogin() {
@@ -73,6 +75,9 @@ public class MemberController extends Controller {
 
 		if (isJoinableLoginId == false) {
 			return String.format("html:<script> alert('%s(은)는 이미 사용중인 아이디 입니다.');history.back(); </script>", loginId);
+		}
+		if (loginId.length() < 4) {
+			return String.format("html:<script> alert(' 아이디는 4자리 이상 입력해주세요.');history.back(); </script>", loginId);
 		}
 
 		if (isJoinableNickname == false) {

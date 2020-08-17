@@ -42,17 +42,12 @@
 				alt="" />
 		</div>
 		<ul class="nav__bar__container right">
-
-			
-				<li><a class="navber__menu__item right"
-					href="${pageContext.request.contextPath}/s/member/doLogout">logout</a></li>
-			
-			
-				<li><a class="navber__menu__item right"
-					href="${pageContext.request.contextPath}/s/member/join">Join</a></li>
-				<li><a class="navber__menu__item right"
-					href="${pageContext.request.contextPath}/s/member/login?afterLoginRedirectUrl=${urlEncodedAfterLoginRedirectUrl}">login</a></li>
-			
+			<li><a class="navber__menu__item right"
+				href="${pageContext.request.contextPath}/s/member/doLogout?redirectUrl=${urlEncodedAfterLogoutRedirectUrl}">logout</a></li>
+			<li><a class="navber__menu__item right"
+				href="${pageContext.request.contextPath}/s/member/join">Join</a></li>
+			<li><a class="navber__menu__item right"
+				href="${pageContext.request.contextPath}/s/member/login?afterLoginRedirectUrl=${urlEncodedAfterLoginRedirectUrl}">login</a></li>
 			<li><a class="navber__menu__item right"
 				href="${pageContext.request.contextPath}/s/home/main">Home</a></li>
 			<li><a class="navber__menu__item right"

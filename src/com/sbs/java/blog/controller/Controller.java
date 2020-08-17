@@ -79,6 +79,8 @@ public abstract class Controller {
 			urlEncodedOldAfterLoginRedirectUrl = Util.getUrlEncoded(urlEncodedOldAfterLoginRedirectUrl);
 			req.setAttribute("urlEncodedAfterLoginRedirectUrl", urlEncodedOldAfterLoginRedirectUrl);
 		}
+		
+		req.setAttribute("urlEncodedAfterLogoutRedirectUrl",currentUrl);
 
 	}
 
