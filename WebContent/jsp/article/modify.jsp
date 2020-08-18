@@ -1,9 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/jsp/part/head.jspf"%>
-
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resource/css/article/write.css" />
+<%@ include file="/jsp/part/toastUiEditor.jspf"%>
 
 <style>
 /* 라이브러리 */
@@ -66,62 +64,30 @@
 </style>
 
 <script>
-	var onBeforeUnloadSetted = false;
-	var onBeforeUnload = function(e) {
-		return '떠나시겠습니까?'; // 요새 브라우저는 이 메시지가 아닌 자체의 메세지가 나옵니다.
-	};
-
-	function applyOnBeforeUnload() {
-		if (onBeforeUnloadSetted)
-			return;
-		$(window).bind('beforeunload', onBeforeUnload); // 떠날 때 실행되는 함수를 등록
-		onBeforeUnloadSetted = true;
-	}
-
-	function removeOnBeforeUnload() {
-		$(window).unbind('beforeunload', onBeforeUnload); // 떠날 때 실행되는 함수를 해제
-		onBeforeUnloadSetted = false;
-	}
-
-	var WriteForm__submitDone = false;
-
+	var submitModifyFormDone = false;
 	function submitModifyForm(form) {
-
-		if (WriteForm__submitDone) {
+		if (submitModifyFormDone) {
 			alert('처리중입니다.');
 			return;
 		}
-
 		form.title.value = form.title.value.trim();
-
 		if (form.title.value.length == 0) {
-			alert('제목을 입력해주세요');
+			alert('제목을 입력해주세요.');
 			form.title.focus();
-			return;
+			return false;
 		}
-
-		form.body.value = form.body.value.trim();
-
-		if (form.body.value.length == 0) {
-			alert('내용을 입력해주세요');
-			form.body.focus();
-			return;
+		var editor = $(form).find('.toast-editor').data('data-toast-editor');
+		var body = editor.getMarkdown();
+		body = body.trim();
+		if (body.length == 0) {
+			alert('내용을 입력해주세요.');
+			editor.focus();
+			return false;
 		}
-
-		removeOnBeforeUnload();
+		form.body.value = body;
 		form.submit();
-		WriteForm__submitDone = true;
+		submitModifyFormDone = true;
 	}
-
-	function WriteForm__init() {
-		// 폼의 특정 요소를 건드리(?)면, 그 이후 부터 외부로 이동하는 것에 참견하는 녀석을 작동시킨다.
-		$('form.write-form input, form.write-form textarea').keyup(function() {
-			applyOnBeforeUnload();
-		});
-
-	}
-
-	WriteForm__init();
 </script>
 
 <h1>게시글수정</h1>
@@ -129,17 +95,19 @@
 	<form action="doModify" class="modify__form form1"
 		onsubmit="submitModifyForm(this); return false;">
 
-		<input type="hidden" name="id" value="${article.id}">
-
+		<input type="hidden" name="id" value="${article.id}"> <input
+			type="hidden" name="body">
 
 		<div class="form__box">
 			<div class="labal">카테고리선택</div>
 			<div class="input">
 
 				<select name="cateItemId">
-					
-						<c:forEach items="${cateItems}" var="cateItem">
-						<option ${article.cateItemId == cateItem.id ? 'selected' : 'selected'} value="${cateItem.id}">${cateItem.name}</option>
+
+					<c:forEach items="${cateItems}" var="cateItem">
+						<option
+							${article.cateItemId == cateItem.id ? 'selected' : 'selected'}
+							value="${cateItem.id}">${cateItem.name}</option>
 					</c:forEach>
 				</select>
 
@@ -156,12 +124,11 @@
 		</div>
 
 
-		<div class="form__box">
-			<div class="labal">내용</div>
+		<div class="form-row">
+			<div class="label">내용</div>
 			<div class="input">
-				<textarea name="body" placeholder="내용을 입력해주세요."
-					value="${article.body}" /></textarea>
-					
+				<script type="text/x-template">${article.bodyForXTemplate}</script>
+				<div class="toast-editor"></div>
 			</div>
 		</div>
 

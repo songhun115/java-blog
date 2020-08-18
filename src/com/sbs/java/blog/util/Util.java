@@ -84,11 +84,11 @@ public class Util {
 	}
 
 	public static String getString(HttpServletRequest req, String paramName, String elseValue) {
-		if ( req.getParameter(paramName) == null ) {
+		if (req.getParameter(paramName) == null) {
 			return elseValue;
 		}
 
-		if ( req.getParameter(paramName).trim().length() == 0 ) {
+		if (req.getParameter(paramName).trim().length() == 0) {
 			return elseValue;
 		}
 
@@ -96,6 +96,54 @@ public class Util {
 	}
 
 	public static boolean isSuccess(Map<String, Object> rs) {
-		return ((String)rs.get("resultCode")).startsWith("S-1");
+		return ((String) rs.get("resultCode")).startsWith("S-1");
+	}
+
+	public static String getNewUrlAndEncoded(Object a) {
+		return "Hi";
+	}
+
+	public static String getNewUrlRemoved(String url, String paramName) {
+		String deleteStrStarts = paramName + "=";
+		int delStartPos = url.indexOf(deleteStrStarts);
+
+		if (delStartPos != -1) {
+			int delEndPos = url.indexOf("&", delStartPos);
+
+			if (delEndPos != -1) {
+				delEndPos++;
+				url = url.substring(0, delStartPos) + url.substring(delEndPos, url.length());
+			} else {
+				url = url.substring(0, delStartPos);
+			}
+		}
+
+		if (url.charAt(url.length() - 1) == '?') {
+			url = url.substring(0, url.length() - 1);
+		}
+
+		if (url.charAt(url.length() - 1) == '&') {
+			url = url.substring(0, url.length() - 1);
+		}
+
+		return url;
+	}
+
+	public static String getNewUrl(String url, String paramName, String paramValue) {
+		url = getNewUrlRemoved(url, paramName);
+
+		if (url.contains("?")) {
+			url += "&" + paramName + "=" + paramValue;
+		} else {
+			url += "?" + paramName + "=" + paramValue;
+		}
+
+		url = url.replace("?&", "?");
+
+		return url;
+	}
+
+	public static String getNewUrlAndEncoded(String url, String paramName, String pramValue) {
+		return getUrlEncoded(getNewUrl(url, paramName, pramValue));
 	}
 }

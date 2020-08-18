@@ -33,6 +33,18 @@
 <script src="${pageContext.request.contextPath}/resource/js/common.js"></script>
 
 <title>정성훈 블로그 ${urlEncodedCurrentUrl}</title>
+
+<c:if test="${isLogined}">
+	<script>
+		loginedMember = {};
+		loginedMember["id"] = parseInt("${loginedMember.id}");
+		loginedMember["regDate"] = "${loginedMember.regDate}";
+		loginedMember["loginId"] = "${loginedMember.loginId}";
+		loginedMember["name"] = "${loginedMember.name}";
+		loginedMember["nickname"] = "${loginedMember.nickname}";
+		loginedMember["email"] = "${loginedMember.email}";
+	</script>
+</c:if>
 </head>
 
 <body>
@@ -42,12 +54,16 @@
 				alt="" />
 		</div>
 		<ul class="nav__bar__container right">
-			<li><a class="navber__menu__item right"
-				href="${pageContext.request.contextPath}/s/member/doLogout?redirectUrl=${urlEncodedAfterLogoutRedirectUrl}">logout</a></li>
-			<li><a class="navber__menu__item right"
-				href="${pageContext.request.contextPath}/s/member/join">Join</a></li>
-			<li><a class="navber__menu__item right"
-				href="${pageContext.request.contextPath}/s/member/login?afterLoginRedirectUrl=${urlEncodedAfterLoginRedirectUrl}">login</a></li>
+			<c:if test="${isLogind}">
+				<li><a class="navber__menu__item right"
+					href="${pageContext.request.contextPath}/s/member/doLogout?redirectUrl=${urlEncodedAfterLogoutRedirectUrl}">logout</a></li>
+			</c:if>
+			<c:if test="${isLogind == false}">
+				<li><a class="navber__menu__item right"
+					href="${pageContext.request.contextPath}/s/member/join">Join</a></li>
+				<li><a class="navber__menu__item right"
+					href="${pageContext.request.contextPath}/s/member/login?afterLoginRedirectUrl=${urlEncodedAfterLoginRedirectUrl}">login</a></li>
+			</c:if>
 			<li><a class="navber__menu__item right"
 				href="${pageContext.request.contextPath}/s/home/main">Home</a></li>
 			<li><a class="navber__menu__item right"

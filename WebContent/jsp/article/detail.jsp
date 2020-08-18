@@ -1,89 +1,54 @@
+<%@ page import="com.sbs.java.blog.util.Util"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/jsp/part/head.jspf"%>
+<%@ include file="/jsp/part/toastUiEditor.jspf"%>
 
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resource/css/article/article.css" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resource/css/home/main.css" />
-<script
-	src="${pageContext.request.contextPath}/resource/js/home/main.js"></script>
-<script src="${pageContext.request.contextPath}/resource/js/common.js"></script>
+<c:if test="${isLogind}">
+	<script>
+		var submitModifyFormDone = false;
+		function submitModifyForm(form) {
+			if (submitModifyFormDone) {
+				alert('처리중입니다.');
+				return;
+			}
+			form.title.value = form.title.value.trim();
+			if (form.title.value.length == 0) {
+				alert('제목을 입력해주세요.');
+				form.title.focus();
+				return false;
+			}
+			var editor = $(form).find('.toast-editor')
+					.data('data-toast-editor');
+			var body = editor.getMarkdown();
+			body = body.trim();
+			if (body.length == 0) {
+				alert('내용을 입력해주세요.');
+				editor.focus();
+				return false;
+			}
+			form.body.value = body;
+			form.submit();
+			submitModifyFormDone = true;
+		}
 
-<!-- 하이라이트 라이브러리 추가, 토스트 UI 에디터에서 사용됨 -->
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
-
-<!-- 하이라이트 라이브러리, 언어 -->
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/css.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/javascript.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/xml.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/php.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/php-template.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/sql.min.js"></script>
-
-<!-- 코드 미러 라이브러리 추가, 토스트 UI 에디터에서 사용됨 -->
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/codemirror.min.css" />
-
-<!-- 토스트 UI 에디터, 자바스크립트 코어 -->
-<script
-	src="https://uicdn.toast.com/editor/latest/toastui-editor-viewer.min.js"></script>
-
-<!-- 토스트 UI 에디터, 신택스 하이라이트 플러그인 추가 -->
-<script
-	src="https://uicdn.toast.com/editor-plugin-code-syntax-highlight/latest/toastui-editor-plugin-code-syntax-highlight-all.min.js"></script>
-
-<!-- 토스트 UI 에디터, CSS 코어 -->
-<link rel="stylesheet"
-	href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" />
-
-<script>
-var onBeforeUnloadSetted = false;
-
-
-
-var WriteForm__submitDone = false;
-
-function WriteFormSubmit(form) {
-
-	if (WriteForm__submitDone) {
-		alert('처리중입니다.');
-		return;
-	}
-
-
-	form.replyBody.value = form.replyBody.value.trim();
-
-	if (form.replyBody.value.length == 0) {
-		alert('내용을 입력해주세요');
-		form.replyBody.focus();
-		return;
-	}
-
-	removeOnBeforeUnload();
-	form.submit();
-	WriteForm__submitDone = true;
-}
-
-function WriteForm__init() {
-	// 폼의 특정 요소를 건드리(?)면, 그 이후 부터 외부로 이동하는 것에 참견하는 녀석을 작동시킨다.
-	$('form.write-form input, form.write-form textarea').keyup(function() {
-		applyOnBeforeUnload();
-	});
-
-}
-
-WriteForm__init();
-</script>
+		function WriteReplyForm__init() {
+			$('.write-reply-form .cancel').click(
+					function() {
+						var editor = $('.write-reply-form .toast-editor').data(
+								'data-toast-editor');
+						editor.setMarkdown('');
+					});
+		}
+		$(function() {
+			WriteReplyForm__init();
+		});
+	</script>
+</c:if>
 
 <style>
 .reply__container {
@@ -91,7 +56,7 @@ WriteForm__init();
 }
 
 .article__replys__list__box>reply__box>reply__list>reply__item.high {
-	background-color:red;
+	background-color: red;
 }
 </style>
 <div class="article__container">
@@ -133,25 +98,15 @@ WriteForm__init();
 				</ul>
 			</div>
 			<div class="detail__body">
-				<div con>
-					<script type="text/x-templete" id="origin1" style="display: none;">${article.bodyForXTemplate}</script>
-					<div id="viewer1"></div>
-					<script>
-						var editor1__initialValue = getBodyFromXTemplate('#origin1');
-						console.log(editor1__initialValue);
-						var editor1 = new toastui.Editor({
-							el : document.querySelector('#viewer1'),
-							height : '600px',
-							initialValue : editor1__initialValue,
-							viewer : true,
-							plugins : [
-									toastui.Editor.plugin.codeSyntaxHighlight,
-									youtubePlugin, replPlugin, codepenPlugin ]
-						});
-					</script>
+				<div>
+					<script type="text/x-template">${article.bodyForXTemplate}</script>
+					<div class="toast-editor toast-editor-viewer"></div>
 				</div>
 			</div>
 		</div>
+
+
+
 
 
 		<div class="reply__container article__replys__list__box ">
@@ -161,14 +116,25 @@ WriteForm__init();
 						<li class="reply__item"><span> <a
 								href="./detail?id=${reply.id}">${reply.body}</a>
 						</span> <span> <a href="./detail?id=${reply.id}">${reply.regDate}</a>
-						</span> <span>
-								<ul class="right__box">
-									<li><a
-										onclick="if( confirm('삭제하시겠습니까?') == false ) return false;"
-										href="./replyDelete?id=${reply.id}">삭제</a></li>
-									<li><a href="./replyModify?id=${reply.id}">수정</a></li>
-								</ul>
-						</span></li>
+						</span> <c:if test="${reply.extra.deleteAvailable}">
+								<span>
+									<ul class="right__box">
+										<li><c:set var="afterDeleteReplyRedirectUrl"
+												value="${Util.getNewUrlRemoved(currentUrl, 'generatedArticleReplyId')}" />
+											<c:set var="afterDeleteReplyRedirectUrl"
+												value="${Util.getNewUrlAndEncoded(afterDeleteReplyRedirectUrl, 'jsAction', 'WriteReplyList__showTop')}" />
+
+											<c:set var="afterModifyReplyRedirectUrl"
+												value="${Util.getNewUrlRemoved(currentUrl, 'generatedArticleReplyId')}" />
+											<c:set var="afterModifyReplyRedirectUrl"
+												value="${Util.getNewUrlAndEncoded(afterModifyReplyRedirectUrl, 'jsAction', 'WriteReplyList__showDetail')}" />
+											<a
+											onclick="if( confirm('삭제하시겠습니까?') == false ) return false;"
+											href="./replyDelete?id=${reply.id}&redirectUrl=${afterDeleteReplyRedirectUrl}">삭제</a></li>
+										<li><a href="./replyModify?id=${reply.id}">수정</a></li>
+									</ul>
+								</span>
+							</c:if></li>
 
 					</c:forEach>
 				</ul>
@@ -177,24 +143,29 @@ WriteForm__init();
 
 
 
-		<div class="form__container">
-
-			<form action=doWriteReply method="POST" class="write__form form1" onsubmit="WriteFormSubmit(this); return false;">
-				<input name="articleId" type="hidden" value="${article.id}" />
-				<div class="form__box form__body">
-					<div class="input">
-						<textarea name="replyBody" placeholder="댓글을 입력해주세요."></textarea>
+		<c:if test="${isLogind}">
+			<div class="write__reply__form__box">
+				<form action=doWriteReply method="POST"
+					class="write-reply-form form1"
+					onsubmit="WriteFormSubmit(this); return false;">
+					<input name="articleId" type="hidden" value="${article.id}" /> <input
+						name="redirectUrl" type="hidden" value="${currentUrl}" />
+					<div class="form__box form__body">
+						<div class="input">
+							<textarea name="replyBody" placeholder="댓글을 입력해주세요."></textarea>
+						</div>
 					</div>
-				</div>
 
-				<div class="form__box form__send">
-					<div class="input">
-						<input type="submit" value="전송" /> <a href="detail">취소</a>
+					<div class="form__box form__send">
+						<div class="input">
+							<input class="send" type="submit" value="전송" /> <input
+								class="cancel" type="button" value="취소" />
+
+						</div>
 					</div>
-				</div>
-			</form>
-		</div>
-
+				</form>
+			</div>
+		</c:if>
 	</div>
 </div>
 

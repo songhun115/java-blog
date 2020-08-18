@@ -72,6 +72,15 @@ public class ArticleController extends Controller {
 
 	// 댓글 삭제
 	private String doActionReplyDelete() {
+		
+		if (Util.empty(req, "id")) {
+			return "html:id를 입력해주세요.";
+		}
+
+		if (Util.isNum(req, "id") == false) {
+			return "html:id를 정수로 입력해주세요.";
+		}
+		
 		int id = Util.getInt(req, "id");
 
 		int loginedMemberId = (int) req.getAttribute("logindMemberId");
@@ -82,10 +91,12 @@ public class ArticleController extends Controller {
 		if (Util.isSuccess(getCheckRsDeleteAvailableRs) == false) {
 			return "html:<script> alert('" + getCheckRsDeleteAvailableRs.get("msg") + "'); history.back(); </script>";
 		}
-
+		
+		String redirectUrl = Util.getString(req,"redirectUrl", "list");
+		
 		articleService.replyDelete(id);
 
-		return "html:<script> location.href = document.referrer; </script>";
+		return "html:<script> alert('" + id + "번 댓글이 삭제되었습니다.'); location.replace('" + redirectUrl + "'); </script>";
 	}
 
 	// 게시물 수정
@@ -145,7 +156,7 @@ public class ArticleController extends Controller {
 	// 게시물 수정
 	private String doActionDoModify() {
 		String title = req.getParameter("title");
-		String body = req.getParameter("body");
+		String body = Util.getString(req, "body");
 		int cateItemId = Util.getInt(req, "cateItemId");
 		int id = Util.getInt(req, "id");
 
@@ -165,7 +176,7 @@ public class ArticleController extends Controller {
 		String body = req.getParameter("body");
 		int logindMemberId = (int) req.getAttribute("logindMemberId");
 		int cateItemId = Util.getInt(req, "cateItemId");
-
+	
 		int id = articleService.write(cateItemId, title, body, logindMemberId);
 
 		return "html:<script> alert('" + id + "번 게시물이 생성되었습니다.'); location.replace('list'); </script>";
@@ -173,12 +184,24 @@ public class ArticleController extends Controller {
 
 	// 댓글 작성
 	private String doActionWriteReply() {
+		if (Util.empty(req, "articleId")) {
+			return "html:articleId를 입력해주세요.";
+		}
+
+		if (Util.isNum(req, "articleId") == false) {
+			return "html:articleId를 정수로 입력해주세요.";
+		}
+		
 		String replyBody = req.getParameter("replyBody");
 		int logindMemberId = (int) req.getAttribute("logindMemberId");
 		int articleId = Util.getInt(req, "articleId");
 
+		String redirectUrl = Util.getString(req, "redirectUrl");
 		int id = articleService.doActionDoArticleReply(replyBody, logindMemberId, articleId);
-		return "html:<script> location.href = document.referrer; </script>";
+		redirectUrl = Util.getNewUrl(redirectUrl, "generatedArticleReplyId", id + "");
+		
+		
+		return "html:<script> alert('" + id + redirectUrl + "번 댓글이 생성되었습니다.'); location.replace('" + redirectUrl + "'); </script>";
 	}
 
 	// 게시물 상세페이지
