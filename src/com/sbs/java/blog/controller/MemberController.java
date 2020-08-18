@@ -44,18 +44,18 @@ public class MemberController extends Controller {
 		HttpSession session = req.getSession();
 		session.setAttribute("logindMemberId", logindMemberId);
 		
-		String redirectUrl = Util.getString(req, "redirectUrl", "../home/main");
+		String redirectUri = Util.getString(req, "redirectUri", "../home/main");
 		
 		
-		return String.format("html:<script> alert('로그인 되었습니다.'); location.replace('" + redirectUrl + "'); </script>");
+		return String.format("html:<script> alert('로그인 되었습니다.'); location.replace('" + redirectUri + "'); </script>");
 	}
 
 	private String doActionDoLogout() {
 		session.removeAttribute("logindMemberId");
 		
-		String redirectUrl = Util.getString(req, "redirectUrl", "../home/main");
+		String redirectUri = Util.getString(req, "redirectUri", "../home/main");
 		
-		return String.format("html:<script> alert('로그아웃 되었습니다'); location.replace('" + redirectUrl + "'); </script>");
+		return String.format("html:<script> alert('로그아웃 되었습니다'); location.replace('" + redirectUri + "'); </script>");
 	}
 
 	private String doActionLogin() {

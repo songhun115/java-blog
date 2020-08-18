@@ -1,4 +1,3 @@
-
 package com.sbs.java.blog.controller;
 
 import java.sql.Connection;
@@ -92,11 +91,11 @@ public class ArticleController extends Controller {
 			return "html:<script> alert('" + getCheckRsDeleteAvailableRs.get("msg") + "'); history.back(); </script>";
 		}
 		
-		String redirectUrl = Util.getString(req,"redirectUrl", "list");
+		String redirectUri = Util.getString(req,"redirectUri", "list");
 		
 		articleService.replyDelete(id);
 
-		return "html:<script> alert('" + id + "번 댓글이 삭제되었습니다.'); location.replace('" + redirectUrl + "'); </script>";
+		return "html:<script> alert('" + id + "번 댓글이 삭제되었습니다.'); location.replace('" + redirectUri + "'); </script>";
 	}
 
 	// 게시물 수정
@@ -196,12 +195,12 @@ public class ArticleController extends Controller {
 		int logindMemberId = (int) req.getAttribute("logindMemberId");
 		int articleId = Util.getInt(req, "articleId");
 
-		String redirectUrl = Util.getString(req, "redirectUrl");
+		String redirectUri = Util.getString(req, "redirectUri");
 		int id = articleService.doActionDoArticleReply(replyBody, logindMemberId, articleId);
-		redirectUrl = Util.getNewUrl(redirectUrl, "generatedArticleReplyId", id + "");
+		redirectUri = Util.getNewUri(redirectUri, "generatedArticleReplyId", id + "");
 		
 		
-		return "html:<script> alert('" + id + redirectUrl + "번 댓글이 생성되었습니다.'); location.replace('" + redirectUrl + "'); </script>";
+		return "html:<script> alert('" + id + redirectUri + "번 댓글이 생성되었습니다.'); location.replace('" + redirectUri + "'); </script>";
 	}
 
 	// 게시물 상세페이지

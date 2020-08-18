@@ -119,18 +119,10 @@
 						</span> <c:if test="${reply.extra.deleteAvailable}">
 								<span>
 									<ul class="right__box">
-										<li><c:set var="afterDeleteReplyRedirectUrl"
-												value="${Util.getNewUrlRemoved(currentUrl, 'generatedArticleReplyId')}" />
-											<c:set var="afterDeleteReplyRedirectUrl"
-												value="${Util.getNewUrlAndEncoded(afterDeleteReplyRedirectUrl, 'jsAction', 'WriteReplyList__showTop')}" />
-
-											<c:set var="afterModifyReplyRedirectUrl"
-												value="${Util.getNewUrlRemoved(currentUrl, 'generatedArticleReplyId')}" />
-											<c:set var="afterModifyReplyRedirectUrl"
-												value="${Util.getNewUrlAndEncoded(afterModifyReplyRedirectUrl, 'jsAction', 'WriteReplyList__showDetail')}" />
+										<li>
 											<a
 											onclick="if( confirm('삭제하시겠습니까?') == false ) return false;"
-											href="./replyDelete?id=${reply.id}&redirectUrl=${afterDeleteReplyRedirectUrl}">삭제</a></li>
+											href="./replyDelete?id=${reply.id}&redirectUri=${afterDeleteReplyRedirectUri}">삭제</a></li>
 										<li><a href="./replyModify?id=${reply.id}">수정</a></li>
 									</ul>
 								</span>
@@ -149,7 +141,7 @@
 					class="write-reply-form form1"
 					onsubmit="WriteFormSubmit(this); return false;">
 					<input name="articleId" type="hidden" value="${article.id}" /> <input
-						name="redirectUrl" type="hidden" value="${currentUrl}" />
+						name="redirectUri" type="hidden" value="${currentUri}" />
 					<div class="form__box form__body">
 						<div class="input">
 							<textarea name="replyBody" placeholder="댓글을 입력해주세요."></textarea>

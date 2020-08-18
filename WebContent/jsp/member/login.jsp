@@ -69,7 +69,7 @@
 		<form action="doLogin" method="POST" class="login__form form1"
 			onsubmit="submitLoginForm(this); return false;">
 			<input type="hidden" name="loginPwReal" />
-			<input type="hidden" name="redirectUrl" value="${param.afterLoginRedirectUrl}" />
+			<input type="hidden" name="redirectUri" value="${param.afterLoginRedirectUri}" />
 			<div class="form__box">
 				<div class="labal">아이디</div>
 				<div class="input">

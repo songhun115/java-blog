@@ -32,7 +32,7 @@
 
 <script src="${pageContext.request.contextPath}/resource/js/common.js"></script>
 
-<title>정성훈 블로그 ${urlEncodedCurrentUrl}</title>
+<title>정성훈 블로그 ${encodedCurrentUri}</title>
 
 <c:if test="${isLogined}">
 	<script>
@@ -56,13 +56,13 @@
 		<ul class="nav__bar__container right">
 			<c:if test="${isLogind}">
 				<li><a class="navber__menu__item right"
-					href="${pageContext.request.contextPath}/s/member/doLogout?redirectUrl=${urlEncodedAfterLogoutRedirectUrl}">logout</a></li>
+					href="${pageContext.request.contextPath}/s/member/doLogout?redirectUri=${encodedAfterLogoutRedirectUri}">logout</a></li>
 			</c:if>
 			<c:if test="${isLogind == false}">
 				<li><a class="navber__menu__item right"
 					href="${pageContext.request.contextPath}/s/member/join">Join</a></li>
 				<li><a class="navber__menu__item right"
-					href="${pageContext.request.contextPath}/s/member/login?afterLoginRedirectUrl=${urlEncodedAfterLoginRedirectUrl}">login</a></li>
+					href="${pageContext.request.contextPath}/s/member/login?afterLoginRedirectUri=${encodedAfterLoginRedirectUri}">login</a></li>
 			</c:if>
 			<li><a class="navber__menu__item right"
 				href="${pageContext.request.contextPath}/s/home/main">Home</a></li>
