@@ -1,3 +1,4 @@
+<%@ page import="com.sbs.java.blog.util.Util"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/jsp/part/head.jspf"%>
@@ -128,12 +129,7 @@
 <div class="form__container">
 	<form action="doReplyModify" class="modify__form form1"
 		onsubmit="submitModifyForm(this); return false;">
-
 		<input type="hidden" name="id" value="${reply.id}">
-
-
-
-
 		<div class="form__box">
 			<div class="labal">내용</div>
 			<div class="input">

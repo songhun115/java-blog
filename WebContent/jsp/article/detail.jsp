@@ -87,6 +87,7 @@
 								<c:if test="${cateItem.id == article.cateItemId }">
 								${cateItem.name}
 								</c:if>
+						</a></li>
 					</c:forEach>
 					<li class="detail__item">조회수 : ${article.hit}</li>
 					<li class="detail__item">${article.regDate}</li>
@@ -94,7 +95,6 @@
 						onclick="if( confirm('삭제하시겠습니까?') == false ) return false;"
 						href="./delete?id=${article.id}">삭제</a></li>
 					<li class="detail__item"><a href="./modify?id=${article.id}">수정</a></li>
-
 				</ul>
 			</div>
 			<div class="detail__body">
@@ -105,10 +105,6 @@
 			</div>
 		</div>
 
-
-
-
-
 		<div class="reply__container article__replys__list__box ">
 			<div class="con reply__box">
 				<ul class="reply__list">
@@ -116,23 +112,21 @@
 						<li class="reply__item"><span> <a
 								href="./detail?id=${reply.id}">${reply.body}</a>
 						</span> <span> <a href="./detail?id=${reply.id}">${reply.regDate}</a>
-						</span> <c:if test="${reply.extra.deleteAvailable}">
+						</span> <c:if test="${isLogind}">
 								<span>
 									<ul class="right__box">
-										<li>
-											<a
+										<li><a
 											onclick="if( confirm('삭제하시겠습니까?') == false ) return false;"
 											href="./replyDelete?id=${reply.id}&redirectUri=${afterDeleteReplyRedirectUri}">삭제</a></li>
-										<li><a href="./replyModify?id=${reply.id}">수정</a></li>
+										<li><a
+											href="./replyModify?id=${reply.id}&redirectUri=${afterModifyReplyRedirectUri}">수정</a></li>
 									</ul>
 								</span>
 							</c:if></li>
-
 					</c:forEach>
 				</ul>
 			</div>
 		</div>
-
 
 
 		<c:if test="${isLogind}">

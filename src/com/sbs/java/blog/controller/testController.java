@@ -4,6 +4,9 @@ import java.sql.Connection;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.sbs.java.blog.service.MailService;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,9 +25,16 @@ public class testController extends Controller {
 			return doActionDbInsert();
 		case "dbSelect":
 			return doActionDbSelect();
+		case "sendMail":
+			return doActionSendMail();
 		}
 
 		return "";
+	}
+
+	private String doActionSendMail() {
+		mailService.send("hoho77113@gamil.com","제목","내용");
+		return "html:성공!";
 	}
 
 	private String doActionDbInsert() {

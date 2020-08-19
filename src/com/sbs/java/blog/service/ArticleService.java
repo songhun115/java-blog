@@ -48,7 +48,8 @@ public class ArticleService extends Service {
 		boolean deleteAvailable = Util.isSuccess(getCheckRsDeleteAvailableReply(reply, id));
 		reply.getExtra().put("deleteAvailable", deleteAvailable);
 
-		
+		boolean modifyAvailable = Util.isSuccess(getCheckRsModifyAvailableReply(reply, id));
+		reply.getExtra().put("modifyAvailable", modifyAvailable);
 
 	}
 
@@ -183,11 +184,44 @@ public class ArticleService extends Service {
 		return rs;
 	}
 
+	private Map<String, Object> getCheckRsModifyAvailableReply(Reply reply, int actorId) {
+
+		Map<String, Object> rs = new HashMap<>();
+
+		if (reply == null) {
+			rs.put("resultCode", "F-1");
+			rs.put("msg", "존재하지 않는 댓글입니다.");
+
+			return rs;
+		}
+
+		if (reply.getMemberId() != actorId) {
+			rs.put("resultCode", "F-2");
+			rs.put("msg", "작성자 본인이 아닙니다.");
+
+			return rs;
+		}
+
+		rs.put("resultCode", "S-1");
+		rs.put("msg", "작업이 가능합니다.");
+
+		return rs;
+	}
+
 	public Map<String, Object> getCheckRsDeleteAvailableReply(int id, int actorId) {
 		Reply reply = articleDao.getForPrintArticleReply(id);
 
 		return getCheckRsDeleteAvailableReply(reply, actorId);
 	}
+
+	public Map<String, Object> getCheckRsModifyAvailableReply(int id, int actorId) {
+		Reply reply = articleDao.getForPrintArticleReply(id);
+
+		return getCheckRsModifyAvailableReply(reply, actorId);
+		
+	}
+
+	
 
 
 

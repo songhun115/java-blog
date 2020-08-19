@@ -52,6 +52,7 @@ public class ArticleController extends Controller {
 		return "";
 	}
 
+	
 	// 게시물 삭제
 	private String doActionDelete() {
 		int id = Util.getInt(req, "id");
@@ -71,7 +72,7 @@ public class ArticleController extends Controller {
 
 	// 댓글 삭제
 	private String doActionReplyDelete() {
-		
+
 		if (Util.empty(req, "id")) {
 			return "html:id를 입력해주세요.";
 		}
@@ -79,7 +80,7 @@ public class ArticleController extends Controller {
 		if (Util.isNum(req, "id") == false) {
 			return "html:id를 정수로 입력해주세요.";
 		}
-		
+
 		int id = Util.getInt(req, "id");
 
 		int loginedMemberId = (int) req.getAttribute("logindMemberId");
@@ -90,9 +91,9 @@ public class ArticleController extends Controller {
 		if (Util.isSuccess(getCheckRsDeleteAvailableRs) == false) {
 			return "html:<script> alert('" + getCheckRsDeleteAvailableRs.get("msg") + "'); history.back(); </script>";
 		}
-		
-		String redirectUri = Util.getString(req,"redirectUri", "list");
-		
+
+		String redirectUri = Util.getString(req, "redirectUri", "list");
+
 		articleService.replyDelete(id);
 
 		return "html:<script> alert('" + id + "번 댓글이 삭제되었습니다.'); location.replace('" + redirectUri + "'); </script>";
@@ -130,11 +131,11 @@ public class ArticleController extends Controller {
 		int id = Util.getInt(req, "id");
 		int loginedMemberId = (int) req.getAttribute("logindMemberId");
 
-		Map<String, Object> getCheckRsDeleteAvailableRs = articleService.getCheckRsDeleteAvailableReply(id,
+		Map<String, Object> getCheckRsModifyAvailableRs = articleService.getCheckRsModifyAvailableReply(id,
 				loginedMemberId);
 
-		if (Util.isSuccess(getCheckRsDeleteAvailableRs) == false) {
-			return "html:<script> alert('" + getCheckRsDeleteAvailableRs.get("msg") + "'); history.back(); </script>";
+		if (Util.isSuccess(getCheckRsModifyAvailableRs) == false) {
+			return "html:<script> alert('" + getCheckRsModifyAvailableRs.get("msg") + "'); history.back(); </script>";
 		}
 		Reply reply = articleService.getForPrintArticleReply(id);
 
@@ -143,13 +144,34 @@ public class ArticleController extends Controller {
 		return "article/reply.jsp";
 	}
 
+	// 댓글 수정
 	private String doActionReplyDoModify() {
-		String body = req.getParameter("body");
+		if (Util.empty(req, "id")) {
+			return "html:id를 입력해주세요.";
+		}
+
+		if (Util.isNum(req, "id") == false) {
+			return "html:id를 정수로 입력해주세요.";
+		}
+
 		int id = Util.getInt(req, "id");
+		String body = Util.getString(req, "body");
+
+		int loginedMemberId = (int) req.getAttribute("logindMemberId");
+
+		Map<String, Object> getReplyCheckRsModifyAvailableRs = articleService.getCheckRsModifyAvailableReply(id,
+				loginedMemberId);
+
+		if (Util.isSuccess(getReplyCheckRsModifyAvailableRs) == false) {
+			return "html:<script> alert('" + getReplyCheckRsModifyAvailableRs.get("msg")
+					+ "'); history.back(); </script>";
+		}
 
 		articleService.replyModify(body, id);
 
-		return "html:<script> alert('" + id + "번 게시물이 수정되었습니다.'); location.replace('detail'); </script>";
+		String redirectUri = Util.getString(req, "redirectUri", "list");
+
+		return "html:<script> alert('" + id + "번 댓글이 수정되었습니다.');  location.replace('" + redirectUri + "'); </script>";
 	}
 
 	// 게시물 수정
@@ -161,7 +183,9 @@ public class ArticleController extends Controller {
 
 		articleService.modify(cateItemId, title, body, id);
 
-		return "html:<script> alert('" + id + "번 게시물이 수정되었습니다.'); location.replace('list'); </script>";
+		String redirectUri = Util.getString(req, "redirectUri", "list");
+
+		return "html:<script> alert('" + id + "번 게시물이 수정되었습니다.'); location.replace('" + redirectUri + "'); </script>";
 	}
 
 	// 게시물 작성
@@ -175,7 +199,7 @@ public class ArticleController extends Controller {
 		String body = req.getParameter("body");
 		int logindMemberId = (int) req.getAttribute("logindMemberId");
 		int cateItemId = Util.getInt(req, "cateItemId");
-	
+
 		int id = articleService.write(cateItemId, title, body, logindMemberId);
 
 		return "html:<script> alert('" + id + "번 게시물이 생성되었습니다.'); location.replace('list'); </script>";
@@ -190,7 +214,7 @@ public class ArticleController extends Controller {
 		if (Util.isNum(req, "articleId") == false) {
 			return "html:articleId를 정수로 입력해주세요.";
 		}
-		
+
 		String replyBody = req.getParameter("replyBody");
 		int logindMemberId = (int) req.getAttribute("logindMemberId");
 		int articleId = Util.getInt(req, "articleId");
@@ -198,9 +222,9 @@ public class ArticleController extends Controller {
 		String redirectUri = Util.getString(req, "redirectUri");
 		int id = articleService.doActionDoArticleReply(replyBody, logindMemberId, articleId);
 		redirectUri = Util.getNewUri(redirectUri, "generatedArticleReplyId", id + "");
-		
-		
-		return "html:<script> alert('" + id + redirectUri + "번 댓글이 생성되었습니다.'); location.replace('" + redirectUri + "'); </script>";
+
+		return "html:<script> alert('" + id + redirectUri + "번 댓글이 생성되었습니다.'); location.replace('" + redirectUri
+				+ "'); </script>";
 	}
 
 	// 게시물 상세페이지
