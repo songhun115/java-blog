@@ -19,7 +19,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class Util {
-	
 	public static boolean empty(HttpServletRequest req, String paramName) {
 		String paramValue = req.getParameter(paramName);
 
@@ -107,11 +106,7 @@ public class Util {
 	}
 
 	public static boolean isSuccess(Map<String, Object> rs) {
-		return ((String) rs.get("resultCode")).startsWith("S-1");
-	}
-
-	public static String getNewUriAndEncoded(Object a) {
-		return "Hi";
+		return ((String) rs.get("resultCode")).startsWith("S-");
 	}
 
 	public static String getNewUriRemoved(String uri, String paramName) {
@@ -157,9 +152,18 @@ public class Util {
 	public static String getNewUriAndEncoded(String uri, String paramName, String pramValue) {
 		return getUriEncoded(getNewUri(uri, paramName, pramValue));
 	}
-	
+
 	public static int sendMail(String smtpServerId, String smtpServerPw, String from, String fromName, String to,
 			String title, String body) {
+		System.out.println(smtpServerId);
+		System.out.println(smtpServerPw);
+		System.out.println(from);
+		System.out.println(fromName);
+		System.out.println(to);
+		System.out.println(title);
+		System.out.println(body);
+		
+		
 		Properties prop = System.getProperties();
 		prop.put("mail.smtp.starttls.enable", "true");
 		prop.put("mail.smtp.host", "smtp.gmail.com");
@@ -178,7 +182,7 @@ public class Util {
 			msg.setFrom(new InternetAddress(from, fromName));
 			msg.setRecipient(Message.RecipientType.TO, new InternetAddress(to));
 			msg.setSubject(title, "UTF-8");
-			msg.setContent(body, "text/html");
+			msg.setContent(body, "text/html; charset=UTF-8");
 
 			Transport.send(msg);
 
@@ -192,7 +196,7 @@ public class Util {
 			System.out.println("UnsupportedEncodingException : " + e.getMessage());
 			return -3;
 		}
-		
+
 		return 1;
 	}
 }

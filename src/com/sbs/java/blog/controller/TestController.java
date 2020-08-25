@@ -1,19 +1,16 @@
 package com.sbs.java.blog.controller;
 
 import java.sql.Connection;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import com.sbs.java.blog.service.MailService;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class testController extends Controller {
-	public testController(Connection dbConn, String actionMethodName, HttpServletRequest req,
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class TestController extends Controller {
+	public TestController(Connection dbConn, String actionMethodName, HttpServletRequest req,
 			HttpServletResponse resp) {
 		super(dbConn, actionMethodName, req, resp);
 	}
@@ -33,8 +30,8 @@ public class testController extends Controller {
 	}
 
 	private String doActionSendMail() {
-		mailService.send("hoho77113@gamil.com","제목","내용");
-		return "html:성공!";
+		mailService.send("jangka512@gmail.com", "안녕하세요.!!!", "<a href=\"https://www.naver.com\" target=\"_blank\">네이버!!!</a>반가워요 ^ ^");
+		return "html:성공";
 	}
 
 	private String doActionDbInsert() {
@@ -116,5 +113,4 @@ public class testController extends Controller {
 	public String getControllerName() {
 		return "test";
 	}
-
 }

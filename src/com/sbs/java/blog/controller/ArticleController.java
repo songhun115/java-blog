@@ -51,7 +51,7 @@ public class ArticleController extends Controller {
 		}
 		return "";
 	}
-
+	
 	
 	// 게시물 삭제
 	private String doActionDelete() {

@@ -35,6 +35,7 @@ public abstract class Controller {
 		articleService = new ArticleService(dbConn);
 		memberService = new MemberService(dbConn);
 		
+		
 		String gmailId = (String)req.getServletContext().getInitParameter("gmailId");
 		String gmailPw = (String)req.getServletContext().getInitParameter("gmailPw");
 		 
@@ -112,6 +113,7 @@ public abstract class Controller {
 
 		return rs;
 	}
+
 
 	private String doGuard() {
 		// 로그인에 관련된 가드 시작
